@@ -1,8 +1,8 @@
 #!/bin/sh
 
-GAMEID=LTX
-GAMENAME=LTX
-GAMEDIR=$HOME/server/LTX
+GAMEID=Chaos
+GAMENAME=Chaos
+GAMEDIR=$HOME/server/Chaos
 PORT=5061
 
 . ../rc.subr.fc21
