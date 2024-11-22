@@ -10,4 +10,7 @@ ltpass*
 *.swp
 
 Chaos/
+Chaos.serv
+
+__pycache__/
 

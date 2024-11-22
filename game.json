@@ -1,3 +1,9 @@
 {
-    "version": 0.1
+    "version": 0.1,
+    "features": {
+        "impetuousUnits": {
+            "enabled": true,
+            "provokingChance": 0.15
+        }
+    }
 }
