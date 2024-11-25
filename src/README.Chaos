@@ -7,3 +7,17 @@ and see how much fun we can have in the ensuing chaos. It is a game-mode where
 anything can happen for no reason. It will not be fair, it will not be 
 balanced, and it will not be predictable. This is not one for the faint of 
 heart, you have been warned!
+
+Features:
+---------
+
+- Impetuous Units:
+
+  - Units with moves remaining may automatically attack enemy units that move
+    next to them and the unit deems it favourable to attack rather than allow
+    themselves to be attacked.
+
+  - A random selection of unit types will provoke units that they move 
+    adjacent to into attacking them regardless of whether it is more favourable
+    to defend against the attack or not.
+
