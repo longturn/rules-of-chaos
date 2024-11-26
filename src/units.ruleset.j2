@@ -532,6 +532,15 @@ flags         = "Unreachable", "DoesntOccupyTile", "CanPillage", "Airliftable"
 ;
 ; */ <-- avoid gettext warnings
 
+{% macro build_flags() -%}
+    "{{ varargs|select("ne", "")|join('", "') }}"
+{%- endmacro %}
+
+{% set provokingChance = features.impetuousUnits.provokingChance if features.impetuousUnits.enabled else 0.0 %}
+{% macro maybe_provoking() -%}
+    {{ "Provoking" if provokingChance is successful else "" }}
+{%- endmacro %}
+
 [unit_settlers]
 name          = _("Settlers")
 class         = "Small Land"
@@ -557,7 +566,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", "Cities", "Unbribable"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", "Cities", "Unbribable", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -601,7 +610,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", "Capturable"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", "Capturable", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -645,7 +654,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "AddToCity", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -688,7 +697,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 ;veteran_names = _("green")
 ;veteran_base_raise_chance = 0
@@ -740,7 +749,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase", "Capturable"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase", "Capturable", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 ;veteran_names = _("green")
 ;veteran_base_raise_chance = 0
@@ -782,7 +791,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase", "Transform"
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "NonMil", "HasNoZOC", "Airbase", "Transform", maybe_provoking()) }}
 ;veteran_names = _("beginner"), _("seasoned"), _("senior"), _("expert")
 ;veteran_base_raise_chance      = 50, 33, 20, 0
 ;veteran_work_raise_chance = 3, 2, 1, 0
@@ -828,7 +837,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "FirstBuild"
 helptext      = _("\
 This unit may be built from the start of the game.  It is the\
@@ -860,7 +869,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Phalanx is armored infantry, suitable for defending your cities.\
@@ -891,7 +900,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "Hut"
 helptext      = _("\
 Archers fight with bows and arrows and have a good offensive\
@@ -923,7 +932,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "BarbarianBuild", "BarbarianSea"
 helptext      = _("\
 Legions are heavily armed and well disciplined infantry\
@@ -959,7 +968,7 @@ bonuses       =
    { "flag", "type", "value"
      "Horse", "DefenseMultiplier", 1
    }
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Equipped with long pikes, Pikemen replaces Phalanx\
@@ -991,7 +1000,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild",
                 "BarbarianTech", "BarbarianBuildTech", "BarbarianSeaTech"
 helptext      = _("\
@@ -1026,7 +1035,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Unique", "Marines"
+flags         = {{ build_flags("Capturer", "Unique", "Marines", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Navy Troops are infantry equipped with early\
@@ -1058,7 +1067,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Riflemen are World War-era infantry, very good\
@@ -1091,7 +1100,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer"
+flags         = {{ build_flags("Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 Infantry are modern version of infantry, relatively good\
@@ -1126,7 +1135,7 @@ uk_food       = 1
 uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "IgTer", "Capturer"
+flags         = {{ build_flags("IgTer", "Capturer", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Alpine Troops are highly mobile units as well as\
@@ -1165,7 +1174,7 @@ uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
 vision_layer  = "Stealth"
-flags         = "IgTer", "IgZOC", "Capturer", "NoHome", "AddToCity"
+flags         = {{ build_flags("IgTer", "IgZOC", "Capturer", "NoHome", "AddToCity", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "Partisan", "BarbarianTech"
 helptext      = _("\
 Partisans are guerilla fighters who are experts\
@@ -1215,7 +1224,7 @@ uk_food       = 1
 uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "Fanatic", "Capturer"
+flags         = {{ build_flags("Fanatic", "Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 Fanatics are warriors extremely devoted to a higher cause.\
@@ -1251,7 +1260,7 @@ uk_food       = 1
 uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "Marines", "Capturer"
+flags         = {{ build_flags("Marines", "Capturer", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild", "BarbarianSeaTech"
 helptext      = _("\
 Marines are infantry who are experts at marine warfare.\
@@ -1284,7 +1293,7 @@ uk_food       = 1
 uk_gold       = 1
 embarks       = "Helicopter"
 disembarks    = "Helicopter"
-flags         = "Paratroopers", "Capturer"
+flags         = {{ build_flags("Paratroopers", "Capturer", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Paratroopers are experts at airborne attacks. From a friendly city, \
@@ -1321,7 +1330,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = ""
+flags         = {{ build_flags(maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit", "FirstBuild"
 helptext      = _("\
 The Mechanized Infantry has the strongest inherent defensive strength \
@@ -1356,7 +1365,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "AttackFastStartUnit", "Hut", "Barbarian", "Hunter"
 helptext      = _("\
 Horsemen are mounted warriors and an early\
@@ -1389,7 +1398,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "AttackFastStartUnit"
 helptext      = _("\
 Chariots are horse-pulled war wagons. They have a stronger attack than \
@@ -1425,7 +1434,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Elephants are towering animals trained for war that are often used as\
@@ -1458,7 +1467,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Fanatic", "Horse"
+flags         = {{ build_flags("Capturer", "Fanatic", "Horse", maybe_provoking()) }}
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Crusaders are highly disciplined mounted\
@@ -1492,7 +1501,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit",
                 "BarbarianTech", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
@@ -1524,7 +1533,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "AttackFastStartUnit", "BarbarianBuildTech", "Hunter"
 helptext      = _("\
 Dragoons are mounted warriors carrying early firearms.\
@@ -1555,7 +1564,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "Capturer", "Horse"
+flags         = {{ build_flags("Capturer", "Horse", maybe_provoking()) }}
 roles         = "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Cavalry are mounted and highly trained soldiers.\
@@ -1586,7 +1595,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = ""
+flags         = {{ build_flags(maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit", "AttackFastStartUnit", "Hunter"
 helptext      = _("\
 Armors are motorized war wagons that are faster, stronger, and can take \
@@ -1621,7 +1630,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "CityBuster", "Capturable"
+flags         = {{ build_flags("CityBuster", "Capturable", maybe_provoking()) }}
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Catapults are large rock-throwing machines of war.\
@@ -1662,7 +1671,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "CityBuster", "Capturable"
+flags         = {{ build_flags("CityBuster", "Capturable", maybe_provoking()) }}
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Trebuchets are large rock-throwing machines of war.\
@@ -1703,7 +1712,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "CityBuster", "Capturable"
+flags         = {{ build_flags("CityBuster", "Capturable", maybe_provoking()) }}
 roles         = "AttackStrongStartUnit", "BarbarianTech", "BarbarianBuildTech"
 helptext      = _("\
 Cannons are large firearms that can fire heavy projectiles over long \
@@ -1738,7 +1747,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "CityBuster", "Capturable"
+flags         = {{ build_flags("CityBuster", "Capturable", maybe_provoking()) }}
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 The artillery is an upgraded cannon. As with its predecessors, it is a \
@@ -1772,7 +1781,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "CityBuster"
+flags         = {{ build_flags("CityBuster", maybe_provoking()) }}
 roles         = "AttackStrongStartUnit"
 helptext      = _("\
 Howitzers are upgraded artillery with improved defensive as well as \
@@ -1806,7 +1815,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 targets       = "Air", "Missile", "Helicopter"
-flags         = "AirAttacker", "HasNoZOC", "OneAttack"
+flags         = {{ build_flags("AirAttacker", "HasNoZOC", "OneAttack", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 Fighters are your first airborne units. They can\
@@ -1843,7 +1852,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Sea", "Missile"
-flags         = "FieldUnit", "OneAttack", "AirAttacker", "Bombarder", "HasNoZOC"
+flags         = {{ build_flags("FieldUnit", "OneAttack", "AirAttacker", "Bombarder", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 Bombers are specialized airborne units that may\
@@ -1885,7 +1894,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Unit"
-flags         = "OneAttack", "AirAttacker", "HasNoZOC"
+flags         = {{ build_flags("OneAttack", "AirAttacker", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 Helicopters can also transport one military land unit; while most troops \
@@ -1927,7 +1936,7 @@ uk_food       = 1
 uk_gold       = 1
 targets       = "Air", "Missile", "Helicopter"
 vision_layer  = "Stealth"
-flags         = "AirAttacker", "HasNoZOC", "OneAttack"
+flags         = {{ build_flags("AirAttacker", "HasNoZOC", "OneAttack", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 An improved Fighter, with improved attack and a higher movement\
@@ -1961,7 +1970,7 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Sea", "Missile"
 vision_layer  = "Stealth"
-flags         = "FieldUnit", "OneAttack", "AirAttacker", "Bombarder", "HasNoZOC"
+flags         = {{ build_flags("FieldUnit", "OneAttack", "AirAttacker", "Bombarder", "HasNoZOC", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 An improved Bomber, with improved attack and a higher movement\
@@ -1995,7 +2004,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant", "Ancient Land"
-flags         = "BadCityDefender", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Trireme is your first boat unit. It can act\
@@ -2037,7 +2046,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant", "Small Unit", "Ancient Land"
-flags         = "BadCityDefender", "HasNoZOC", "Settlers", "NonMil"
+flags         = {{ build_flags("BadCityDefender", "HasNoZOC", "Settlers", "NonMil", maybe_provoking()) }}
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Barge can travel on ocean (but not deep ocean) and it can\
@@ -2072,7 +2081,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Land", "Merchant"
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC", "Unique", "Unbribable"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", "Unique", "Unbribable", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
 The Longboat is one of your first deep ocean capable boat units\
@@ -2120,7 +2129,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Ancient Land"
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
 The War Longboat is one of your first deep ocean capable boat units\
@@ -2159,7 +2168,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
 The Pirogue is your first unit able to truly explore the oceans\
@@ -2197,7 +2206,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
 The Cog is your second unit able explore the oceans without the limitations from supplies.\
@@ -2233,7 +2242,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
 The patrol cutter is a modern ship able to patrol the oceans and warn you about the enemy vessels trying to lurk into your native waters.\
@@ -2270,7 +2279,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Big Land", "Big Siege", "Merchant","Ancient Land"
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat"
 helptext      = _("\
  A much larger version of the caravel, it is most notorious \
@@ -2313,7 +2322,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant", "Ancient Land"
-flags         = "BadCityDefender", "Only_Native_Attack", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Caravel is a sailing ship that can enter\
@@ -2346,7 +2355,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Big Land", "Merchant", "Big Siege", "Amphibious", "Ancient Land"
-flags         = "BadCityDefender", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "HasNoZOC", maybe_provoking()) }}
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Galleon is a pure transport ship, the first which can\
@@ -2379,7 +2388,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 The Frigate is a specialized ship with a strong offensive value,\
@@ -2413,7 +2422,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Unit"
-flags         = "BadCityDefender", "Unique", "Unbribable"
+flags         = {{ build_flags("BadCityDefender", "Unique", "Unbribable", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 The Frigate is a specialized ship with a strong offensive value,\
@@ -2449,7 +2458,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 The Ironclad is an armored ship,\
@@ -2485,7 +2494,7 @@ bonuses       =
    { "flag", "type", "value"
      "Submarine", "DefenseMultiplier", 1
    }
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 An improved Ironclad, with better move rate and vision.\
@@ -2521,7 +2530,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Sea"
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Cruiser is a strong offensive boat unit.\
@@ -2557,7 +2566,7 @@ bonuses       =
      "AirAttacker", "DefenseMultiplier", 4
    }
 cargo         = "Small Sea"
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The AEGIS Cruiser is equipped with an advanced\
@@ -2589,7 +2598,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "DefendOk", "DefendOkStartUnit"
 helptext      = _("\
 The Battleship is the supreme naval unit with\
@@ -2623,7 +2632,7 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile"
 vision_layer  = "Subsurface"
-flags         = "BadCityDefender", "Only_Native_Attack", "Submarine"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have\
@@ -2660,7 +2669,7 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile", "Nuclear", "Small Sea"
 vision_layer  = "Subsurface"
-flags         = "BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have\
@@ -2702,7 +2711,7 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile", "Nuclear", "Small Sea"
 vision_layer  = "Subsurface"
-flags         = "BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome"
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome", maybe_provoking()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling deep under the surface of the ocean, these new Nuclear Submarines have\
@@ -2742,7 +2751,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Air", "Missile", "Helicopter", "Nuclear"
-flags         = "BadCityDefender", "HasNoZOC"
+flags         = {{ build_flags("BadCityDefender", "HasNoZOC", maybe_provoking()) }}
 roles         = "DefendGood", "DefendGoodStartUnit"
 helptext      = _("\
 The Carrier is a mobile airport.\
@@ -2782,7 +2791,7 @@ uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Big Land", "Merchant", "Big Siege","Small Unit", "Amphibious", "Ancient Land"
-flags         = "Settlers", "BadCityDefender", "HasNoZOC"
+flags         = {{ build_flags("Settlers", "BadCityDefender", "HasNoZOC", maybe_provoking()) }}
 veteran_names = _("green (100%)"), _("veteran 1 (150%)"), _("veteran 2 (175%)"), _("veteran 3 (200%)"), _("hardened 1 (225%)"), _("hardened 2 (250%)"), _("hardened 3 (275%)"), _("elite 1 (300%)"), _("elite 2 (325%)"), _("elite 3 (350%)")
 veteran_base_raise_chance = 50, 45, 40, 35, 30, 25, 20, 15, 10, 0
 veteran_work_raise_chance = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -2829,7 +2838,7 @@ uk_gold       = 1
 targets       = "Deep Sea"
 embarks       = "Deep Sea", "Air"
 disembarks    = "Deep Sea", "Air"
-flags         = "OneAttack", "HasNoZOC"
+flags         = {{ build_flags("OneAttack", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Advanced Torpedo is a unit able to target enemy deep sea units. It is expensive, has short range but it able to hit otherwise unreachable deep sea units. This is the first torpedo unit the players can move. \
@@ -2872,7 +2881,7 @@ uk_gold       = 1
 targets       = "Air", "Missile", "Helicopter", "Nuclear"
 embarks       = "Deep Sea", "Air"
 disembarks    = "Deep Sea", "Air"
-flags         = "OneAttack", "AirAttacker", "HasNoZOC"
+flags         = {{ build_flags("OneAttack", "AirAttacker", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Air Defense Missile is a missile unit able to shoot down enemy air units.\
@@ -2916,7 +2925,7 @@ uk_gold       = 1
 targets       = "Helicopter"
 embarks       = "Deep Sea", "Air"
 disembarks    = "Deep Sea", "Air"
-flags         = "OneAttack", "AirAttacker", "CityBuster", "HasNoZOC"
+flags         = {{ build_flags("OneAttack", "AirAttacker", "CityBuster", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Cruise Missile is a long-distance missile\
@@ -2955,7 +2964,7 @@ uk_gold       = 1
 targets       = "Helicopter"
 embarks       = "Deep Sea", "Air"
 disembarks    = "Deep Sea", "Air"
-flags         = "OneAttack", "AirAttacker", "HasNoZOC"
+flags         = {{ build_flags("OneAttack", "AirAttacker", "HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Intercontinental Missile is an ultra long-distance missile\
@@ -3000,7 +3009,7 @@ uk_food       = 0
 uk_gold       = 1
 embarks       = "Deep Sea"
 disembarks    = "Deep Sea"
-flags         = "FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NoVeteran",  "NoHome", "Unique"
+flags         = {{ build_flags("FieldUnit", "OneAttack", "Nuclear", "HasNoZOC", "NoVeteran",  "NoHome", "Unique", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3065,7 +3074,7 @@ uk_food       = 0
 uk_gold       = 1
 embarks       = "Deep Sea"
 disembarks    = "Deep Sea"
-flags         = "FieldUnit", "OneAttack", "Nuclear", "AirAttacker", "NoVeteran",  "NoHome"
+flags         = {{ build_flags("FieldUnit", "OneAttack", "Nuclear", "AirAttacker", "NoVeteran",  "NoHome", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3131,7 +3140,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Diplomat", "IgZOC", "NonMil", "HasNoZOC", "RealDiplomat"
+flags         = {{ build_flags("Diplomat", "IgZOC", "NonMil", "HasNoZOC", "RealDiplomat", maybe_provoking()) }}
 veteran_names =
 ; /* TRANS: diplomatic rank. */
   _("?diplomatic_rank:attaché"),
@@ -3234,7 +3243,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "Diplomat", "RealDiplomat","IgZOC", "NonMil", "HasNoZOC", "Spy", "RealSpy"
+flags         = {{ build_flags("Diplomat", "RealDiplomat","IgZOC", "NonMil", "HasNoZOC", "Spy", "RealSpy", maybe_provoking()) }}
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -3301,7 +3310,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 vision_layer  = "Stealth"
-flags         = "Diplomat", "RealDiplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy", "IgTer", "RealSpy"
+flags         = {{ build_flags("Diplomat", "RealDiplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy", "IgTer", "RealSpy", maybe_provoking()) }}
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -3376,7 +3385,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique"
+flags         = {{ build_flags("IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3434,7 +3443,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique"
+flags         = {{ build_flags("IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3492,7 +3501,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique"
+flags         = {{ build_flags("IgZOC", "NonMil", "HasNoZOC", "Diplomat", "Spy", "Unique", maybe_provoking()) }}
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3550,7 +3559,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "HelpWonder", "NonMil", "HasNoZOC", "Capturable"
+flags         = {{ build_flags("HelpWonder", "NonMil", "HasNoZOC", "Capturable", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 A Caravan carries goods or material for trading with other nations,\
@@ -3595,7 +3604,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "HelpWonder", "NonMil", "HasNoZOC", "Capturable"
+flags         = {{ build_flags("HelpWonder", "NonMil", "HasNoZOC", "Capturable", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Freight unit replaces the Caravan, and moves at twice the speed.\
@@ -3627,7 +3636,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify"
+flags         = {{ build_flags("IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify", maybe_provoking()) }}
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\
@@ -3674,8 +3683,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy", 
-                "EvacuateFirst", "Unbribable", "GameLoss", "Unique"
+flags         = {{ build_flags("IgZOC", "NonMil", "NoBuild", "NoHome", "SuperSpy", "EvacuateFirst", "Unbribable", "GameLoss", "Unique", maybe_provoking()) }}
+
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3714,8 +3723,8 @@ uk_happy      = 0
 uk_shield     = 0
 uk_food       = 0
 uk_gold       = 0
-flags         = "IgZOC", "NonMil", "Unbribable",
-                "EvacuateFirst", "SuperSpy", "NoHome", "NoBuild"
+flags         = {{ build_flags("IgZOC", "NonMil", "Unbribable", "EvacuateFirst", "SuperSpy", "NoHome", "NoBuild", maybe_provoking()) }}
+
 ; No veteran levels (level name is never displayed)
 veteran_names = _("green")
 veteran_base_raise_chance = 0
@@ -3756,7 +3765,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = "HasNoZOC"
+flags         = {{ build_flags("HasNoZOC", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
@@ -3793,7 +3802,7 @@ uk_food       = 1
 uk_gold       = 1
 targets       = "Air", "Missile", "Helicopter"
 vision_layer  = "Stealth"
-flags         = "AirAttacker"
+flags         = {{ build_flags("AirAttacker", maybe_provoking()) }}
 roles         = "DefendGood"
 helptext      = _("\
 An improved Stealth Fighter, with a higher movement\
@@ -3831,7 +3840,7 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Small Sea", "Missile"
 vision_layer  = "Stealth"
-flags         = "FieldUnit", "OneAttack", "AirAttacker", "Bombarder"
+flags         = {{ build_flags("FieldUnit", "OneAttack", "AirAttacker", "Bombarder", maybe_provoking()) }}
 roles         = "DefendOk"
 helptext      = _("\
 An improved Stealth Bomber, with a higher movement\
@@ -3866,7 +3875,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = "BadCityDefender"
+flags         = {{ build_flags("BadCityDefender", maybe_provoking()) }}
 roles         = "DefendOk"
 helptext      = _("\
 A battleship powered by fusion power \
@@ -3900,7 +3909,7 @@ uk_happy      = 1
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = ""
+flags         = {{ build_flags(maybe_provoking()) }}
 roles         = "DefendOk", "Hunter"
 helptext      = _("\
 A fusion powered Armor attacking \
@@ -3935,7 +3944,7 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 cargo         = "Land", "Small Land", "Merchant", "Small Unit", "Amphibious", "Big Land"
-flags         = "Unbribable"
+flags         = {{ build_flags("Unbribable", maybe_provoking()) }}
 roles         = ""
 helptext      = _("\
 The Cargo Aircraft is an airplane with an exceptionally high range while carrying \
