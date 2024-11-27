@@ -4,6 +4,12 @@
         "impetuousUnits": {
             "enabled": true,
             "provokingChance": 0.15
+        },
+        "inaccessibleClimates": {
+            "enabled": true,
+            "baseCityPollution": 1,
+            "globalWarmingAccumulationFactor": 5.0,
+            "pollutionProductionIncrease": 1
         }
     }
 }

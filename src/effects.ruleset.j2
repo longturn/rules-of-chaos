@@ -4827,6 +4827,21 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present"
       "Terrain", "Inaccessible", "Local", FALSE
+{%- if features.inaccessibleClimates.enabled %}
+      "Terrain", "Inaccessible Deep Ocean", "Local", FALSE
+      "Terrain", "Inaccessible Desert", "Local", FALSE
+      "Terrain", "Inaccessible Forest", "Local", FALSE
+      "Terrain", "Inaccessible Glacier", "Local", FALSE
+      "Terrain", "Inaccessible Grassland", "Local", FALSE
+      "Terrain", "Inaccessible Hills", "Local", FALSE
+      "Terrain", "Inaccessible Jungle", "Local", FALSE
+      "Terrain", "Inaccessible Lake", "Local", FALSE
+      "Terrain", "Inaccessible Mountains", "Local", FALSE
+      "Terrain", "Inaccessible Ocean", "Local", FALSE
+      "Terrain", "Inaccessible Plains", "Local", FALSE
+      "Terrain", "Inaccessible Swamp", "Local", FALSE
+      "Terrain", "Inaccessible Tundra", "Local", FALSE
+{% endif -%}
     }
 
 ; each city has at least one slot to build units
@@ -4959,6 +4974,27 @@ reqs    =
       ; Oil Well also prevents irrigation, but requires Mine so not needed here
     }
 
+{% if features.inaccessibleClimates.enabled %}
+
+[effect_pollution]
+type    = "Outfput_Add_Tile"
+value   = {{ features.inaccessibleClimates.pollutionProductionIncrease }}
+reqs    =
+    { "type", "name", "range", "present"
+      "Extra", "Pollution", "Local", TRUE
+      "OutputType", "Shield", "Local", TRUE
+    }
+
+[effect_fallout]
+type	= "Output_Tile_Punish_Pct"
+value	= 50
+reqs	=
+    { "type", "name", "range", "present"
+      "Extra", "Fallout", "Local", TRUE
+    }
+
+{% else %}
+
 [effect_pollution]
 type	= "Output_Tile_Punish_Pct"
 value	= 50
@@ -4985,6 +5021,8 @@ reqs	=
       "Extra", "Fallout", "Local"
       "Extra", "Pollution", "Local"
     }
+
+{% endif %}
 
 [effect_incident_caught_steal_tech]
 type	= "Casus_Belli_Caught"
