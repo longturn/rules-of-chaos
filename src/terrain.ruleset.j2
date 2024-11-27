@@ -10,6 +10,8 @@
 ; Note that the freeciv AI may not cope well with anything more
 ; than minor changes.
 
+{% set inaccessibleClimates = features.inaccessibleClimates.enabled %}
+
 [datafile]
 description="Longturn Traditional based on Civ2Civ3 tile_type data for Freeciv"
 options="+Freeciv-ruleset-Devel-2017.Jan.02"
@@ -260,6 +262,647 @@ helptext             = _("\
 No unit can enter this terrain, nor can any city work its tiles.\
 ")
 
+{% if inaccessibleClimates %}
+
+[terrain_inaccessible_lake]
+name                 = _("Inaccessible Lake")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "="
+class                = "Oceanic"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Fish"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Lake"
+warmer_drier_result  = "Swamp"
+cooler_wetter_result = "Glacier"
+cooler_drier_result  = "Tundra"
+flags                = "NotGenerated", "NoPollution", "NoCities", "NoBarbs", "NoZoc", "NoFortify", "UnsafeCoast"
+property_ocean_depth = 0
+color.r              = 36
+color.g              = 73
+color.b              = 104
+helptext             = _("\
+Lakes are substantial bodies of fresh water.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_ocean]
+name                 = _("Inaccessible Ocean")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "."
+class                = "Oceanic"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Fish", "Whales"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Ocean"
+warmer_drier_result  = "Swamp"
+cooler_wetter_result = "Glacier"
+cooler_drier_result  = "Glacier"
+flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea", "NotGenerated", "NoPollution"
+property_ocean_depth = 35
+color.r              = 12
+color.g              = 36
+color.b              = 81
+helptext             = _("\
+Shallow oceans are mostly found near coastlines, and are often rich\
+ sources of food and other resources.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_deep_ocean]
+name                 = _("Inaccessible Deep Ocean")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = ";"
+class                = "Oceanic"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+;resources            = "none"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Deep Ocean"
+warmer_drier_result  = "Deep Ocean"
+cooler_wetter_result = "Deep Ocean"
+cooler_drier_result  = "Deep Ocean"
+flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea", "NotGenerated", "NoPollution"
+property_ocean_depth = 70
+color.r              = 13
+color.g              = 29
+color.b              = 77
+helptext             = _("\
+Deep oceans cover much of the world away from coastlines, and only\
+ seaworthy units (not including Triremes) can travel on them.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_glacier]
+name                 = _("Inaccessible Glacier")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "A"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Ivory", "Oil"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Tundra"
+warmer_drier_result  = "Tundra"
+cooler_wetter_result = "Glacier"
+cooler_drier_result  = "Glacier"
+flags                = "NoBarbs", "CanHaveRiver", "Oil", "Frozen", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_frozen      = 100
+color.r              = 129
+color.g              = 129
+color.b              = 129
+helptext             = _("\
+Glaciers are found only in the most northerly or southerly\
+ reaches of the world.  They are very cold, and hence difficult to\
+ work with.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_desert]
+name                 = _("Inaccessible Desert")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "D"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Oasis", "Oil"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Plains"
+warmer_drier_result  = "Desert"
+cooler_wetter_result = "Tundra"
+cooler_drier_result  = "Desert"
+flags                = "CanHaveRiver", "Oil", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_dry         = 100
+property_tropical    = 50
+property_temperate   = 20
+color.r              = 120
+color.g              = 105
+color.b              = 66
+helptext             = _("\
+Deserts are regions of extreme dryness, making agriculture and\
+ trade very difficult.\
+"), _("\
+Rivers bring fertile soil to deserts; on a desert river not already\
+ benefiting from an oasis, building irrigation will yield two extra food\
+ resources rather than the usual one.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_forest]
+name                 = _("Inaccessible Forest")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "F"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Pheasant", "Silk"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Jungle"
+warmer_drier_result  = "Plains"
+cooler_wetter_result = "Swamp"
+cooler_drier_result  = "Tundra"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_cold        = 20
+property_wet         = 20
+property_foliage     = 50
+property_temperate   = 50
+color.r              = 34
+color.g              = 66
+color.b              = 22
+helptext             = _("\
+Forests are densely wooded, making agriculture somewhat\
+ problematic.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_grassland]
+name                 = _("Inaccessible Grassland")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "G"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Resources"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Swamp"
+warmer_drier_result  = "Plains"
+cooler_wetter_result = "Tundra"
+cooler_drier_result  = "Tundra"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_green       = 50
+property_temperate   = 50
+color.r              = 18
+color.g              = 82
+color.b              = 15
+helptext             = _("\
+Grasslands afford exceptional agricultural opportunities.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_hills]
+name                 = _("Inaccessible Hills")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "H"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Coal", "Wine"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Hills"
+warmer_drier_result  = "Hills"
+cooler_wetter_result = "Hills"
+cooler_drier_result  = "Hills"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_green       = 50
+property_mountainous = 30
+color.r              = 25
+color.g              = 61
+color.b              = 15
+helptext             = _("\
+In addition to being amenable to agriculture, Hills are frequently\
+ rich in resources.\
+"), _("\
+Cities built in hills are at risk of earthquakes, which can interrupt\
+ a city's current project.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_jungle]
+name                 = _("Inaccessible Jungle")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "J"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Gems", "Fruit"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Swamp"
+warmer_drier_result  = "Desert"
+cooler_wetter_result = "Forest"
+cooler_drier_result  = "Tundra"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_foliage     = 50
+property_tropical    = 50
+property_wet         = 50
+color.r              = 40
+color.g              = 91
+color.b              = 32
+helptext             = _("\
+Jungles are densely overgrown, making agriculture somewhat\
+ problematic. Some land units may not move into jungle without\
+ a road.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_mountains]
+name                 = _("Inaccessible Mountains")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "M"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Gold", "Iron"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Mountains"
+warmer_drier_result  = "Mountains"
+cooler_wetter_result = "Mountains"
+cooler_drier_result  = "Mountains"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_mountainous = 70
+color.r              = 77
+color.g              = 76
+color.b              = 72
+helptext             = _("\
+Mountains are regions of extreme altitude, making agriculture and\
+ trade very difficult.\
+"), _("\
+Land units that move into mountains can see an extra space, but a\
+ fast land unit ending its turn in mountains without a road will start\
+ its next turn with one fewer movement point. Some land units may not\
+ move into mountains without a road.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_plains]
+name                 = _("Inaccessible Plains")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "P"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Buffalo", "Wheat"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Grassland"
+warmer_drier_result  = "Desert"
+cooler_wetter_result = "Tundra"
+cooler_drier_result  = "Desert"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_green       = 50
+property_temperate   = 50
+color.r              = 74
+color.g              = 91
+color.b              = 36
+helptext             = _("\
+Plains are very broad, sparse regions, which makes trade slightly\
+ inconvenient.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_swamp]
+name                 = _("Inaccessible Swamp")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "S"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Peat", "Spice"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Ocean"
+warmer_drier_result  = "Plains"
+cooler_wetter_result = "Glacier"
+cooler_drier_result  = "Tundra"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_wet         = 100
+property_tropical    = 10
+property_temperate   = 10
+property_cold        = 10
+color.r              = 37
+color.g              = 55
+color.b              = 61
+helptext             = _("\
+Swamps suffer from an over-abundance of water, making agriculture\
+ somewhat problematic. Some land units may not move in swamps without\
+ a road.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+[terrain_inaccessible_tundra]
+name                 = _("Inaccessible Tundra")
+graphic              = "inaccessible"
+graphic_alt          = "arctic"
+identifier           = "T"
+class                = "Land"
+movement_cost        = 0
+defense_bonus        = 0
+food                 = 0
+shield               = 0
+trade                = 0
+resources            = "Game", "Furs", "Gold"
+road_food_incr_pct   = 0
+road_shield_incr_pct = 0
+road_trade_incr_pct  = 0
+base_time            = 0
+road_time            = 0
+cultivate_time       = 0
+plant_time           = 0
+irrigation_result    = "no"
+irrigation_food_incr = 0
+irrigation_time      = 0
+mining_result        = "no"
+mining_shield_incr   = 0
+mining_time          = 0
+transform_result     = "no"
+transform_time       = 0
+pillage_time         = 0
+clean_pollution_time = 0
+clean_fallout_time   = 0
+animal               = "None"
+warmer_wetter_result = "Swamp"
+warmer_drier_result  = "Plains"
+cooler_wetter_result = "Glacier"
+cooler_drier_result  = "Desert"
+flags                = "NoBarbs", "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+property_cold        = 50
+color.r              = 107
+color.g              = 107
+color.b              = 107
+helptext             = _("\
+Tundra are broad, cold regions, fit for some agriculture and little\
+ else.\
+"), _("\
+No unit can enter this terrain, nor can any city work its tiles.\
+")
+
+{% endif %}
+
 [terrain_lake]
 name                 = _("Lake")
 graphic              = "lake"
@@ -291,10 +934,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Lake"
+warmer_drier_result  = "Inaccessible Lake"
+cooler_wetter_result = "Inaccessible Lake"
+cooler_drier_result  = "Inaccessible Lake"
+{%- else %}
 warmer_wetter_result = "no"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
+{%- endif %}
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Patrol", "Amphibious", "Nuclear", "Small Sea"
 flags                = "NoCities", "NoBarbs", "NoPollution", "FreshWater", "NoZoc", "NoFortify"
 property_ocean_depth = 0
@@ -336,10 +986,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Ocean"
+warmer_drier_result  = "Inaccessible Ocean"
+cooler_wetter_result = "Inaccessible Ocean"
+cooler_drier_result  = "Inaccessible Ocean"
+{%- else %}
 warmer_wetter_result = "no"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Glacier"
+{%- endif %}
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Trireme", "Patrol", "Amphibious", "Nuclear", "Small Sea", "Deep Sea"
 flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea"
 property_ocean_depth = 35
@@ -382,10 +1039,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Deep Ocean"
+warmer_drier_result  = "Inaccessible Deep Ocean"
+cooler_wetter_result = "Inaccessible Deep Ocean"
+cooler_drier_result  = "Inaccessible Deep Ocean"
+{%- else %}
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
+{%- endif %}
 native_to            = "Sea", "Air", "Missile", "Helicopter", "Patrol", "Nuclear", "Deep Sea", "Small Sea"
 flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea"
 property_ocean_depth = 70
@@ -428,10 +1092,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Glacier"
+warmer_drier_result  = "Inaccessible Glacier"
+cooler_wetter_result = "Inaccessible Glacier"
+cooler_drier_result  = "Inaccessible Glacier"
+{%- else %}
 warmer_wetter_result = "Tundra"
 warmer_drier_result  = "Tundra"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Nuclear", "Ancient Land"
 flags                = "NoBarbs", "CanHaveRiver", "Oil", "Frozen"
 property_frozen      = 100
@@ -475,10 +1146,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Desert"
+warmer_drier_result  = "Inaccessible Desert"
+cooler_wetter_result = "Inaccessible Desert"
+cooler_drier_result  = "Inaccessible Desert"
+{%- else %}
 warmer_wetter_result = "Plains"
 warmer_drier_result  = "no"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "no"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Amphibious", "Nuclear", "Ancient Land"
 flags                = "CanHaveRiver", "Oil"
 property_dry         = 100
@@ -527,10 +1205,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Forest"
+warmer_drier_result  = "Inaccessible Forest"
+cooler_wetter_result = "Inaccessible Forest"
+cooler_drier_result  = "Inaccessible Forest"
+{%- else %}
 warmer_wetter_result = "Jungle"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Swamp"
 cooler_drier_result  = "Tundra"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Nuclear", "Ancient Land"
 flags                = "Starter", "CanHaveRiver"
 property_cold        = 20
@@ -576,10 +1261,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Grassland"
+warmer_drier_result  = "Inaccessible Grassland"
+cooler_wetter_result = "Inaccessible Grassland"
+cooler_drier_result  = "Inaccessible Grassland"
+{%- else %}
 warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Amphibious", "Nuclear", "Ancient Land"
 flags                = "Starter", "CanHaveRiver"
 property_green       = 50
@@ -622,10 +1314,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Hills"
+warmer_drier_result  = "Inaccessible Hills"
+cooler_wetter_result = "Inaccessible Hills"
+cooler_drier_result  = "Inaccessible Hills"
+{%- else %}
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Nuclear", "Ancient Land"
 flags                = "Starter", "CanHaveRiver"
 property_green       = 50
@@ -672,10 +1371,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Jungle"
+warmer_drier_result  = "Inaccessible Jungle"
+cooler_wetter_result = "Inaccessible Jungle"
+cooler_drier_result  = "Inaccessible Jungle"
+{%- else %}
 warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Forest"
 cooler_drier_result  = "Tundra"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter", "Small Unit", "Nuclear", "Ancient Land"
 flags                = "CanHaveRiver"
 property_foliage     = 50
@@ -721,10 +1427,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Mountains"
+warmer_drier_result  = "Inaccessible Mountains"
+cooler_wetter_result = "Inaccessible Mountains"
+cooler_drier_result  = "Inaccessible Mountains"
+{%- else %}
 warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter", "Small Unit", "Nuclear", "Ancient Land"
 flags                = "CanHaveRiver"
 property_mountainous = 70
@@ -772,10 +1485,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Plains"
+warmer_drier_result  = "Inaccessible Plains"
+cooler_wetter_result = "Inaccessible Plains"
+cooler_drier_result  = "Inaccessible Plains"
+{%- else %}
 warmer_wetter_result = "Grassland"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Desert"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Amphibious", "Nuclear", "Ancient Land"
 flags                = "Starter", "CanHaveRiver"
 property_green       = 50
@@ -819,10 +1539,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Swamp"
+warmer_drier_result  = "Inaccessible Swamp"
+cooler_wetter_result = "Inaccessible Swamp"
+cooler_drier_result  = "Inaccessible Swamp"
+{%- else %}
 warmer_wetter_result = "Ocean"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Air", "Missile", "Helicopter", "Small Unit", "Amphibious", "Nuclear", "Ancient Land"
 flags                = "CanHaveRiver"
 property_wet         = 100
@@ -869,10 +1596,17 @@ pillage_time         = 1
 clean_pollution_time = 3
 clean_fallout_time   = 3
 animal               = "None"
+{%- if inaccessibleClimates %}
+warmer_wetter_result = "Inaccessible Tundra"
+warmer_drier_result  = "Inaccessible Tundra"
+cooler_wetter_result = "Inaccessible Tundra"
+cooler_drier_result  = "Inaccessible Tundra"
+{%- else %}
 warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
+{%- endif %}
 native_to            = "Land", "Small Land", "Merchant", "Big Land", "Air", "Missile", "Helicopter", "Big Siege", "Small Unit", "Amphibious", "Nuclear", "Ancient Land"
 flags                = "NoBarbs", "CanHaveRiver"
 property_cold        = 50
