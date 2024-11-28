@@ -28,6 +28,12 @@ format_version=20
 ;                           See README.effects for help on requirements
 ;
 ; */ <-- avoid gettext warnings
+    
+{%- macro vision_blind(radius_sq) -%}
+    {{ features.blindWorld.blindVisionRadius ** 2
+           if features.blindWorld.enabled
+           else radius_sq }}
+{%- endmacro -%}
 
 ; "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 [effect_ai_cheat_food]
@@ -199,7 +205,7 @@ reqs    =
 ; Vision benefit from fortress watchtowers
 [effect_fortress_vision]
 type    = "Unit_Vision_Radius_Sq"
-value   = 18
+value   = {{ vision_blind(18) }}
 reqs    =
     { "type", "name", "range"
       "Extra", "Fortress", "Local"
@@ -208,7 +214,7 @@ reqs    =
 
 [effect_airbase_vision]
 type    = "Unit_Vision_Radius_Sq"
-value   = 18
+value   = {{ vision_blind(18) }}
 reqs    =
     { "type", "name", "range"
       "Extra", "Airbase", "Local"
@@ -324,6 +330,19 @@ reqs    =
 type    = "Max_Trade_Routes"
 value   = 0
 
+{% if features.blindWorld.enabled -%}
+; Vision benefit from mountains (for explorer type units only)
+[effect_mountains_vision]
+type    = "Unit_Vision_Radius_Sq"
+{% set smVisBonus = features.blindWorld.surfaceMountainVisionBonus -%}
+{% set nbsVis = features.blindWorld.nonBlindSurfaceVisionRadius -%}
+value   = {{ ((nbsVis + smVisBonus) ** 2) - (nbsVis ** 2) }}
+reqs    =
+    { "type", "name", "range", "present"
+      "Terrain", "Mountains", "Local", TRUE
+      "UnitType", "Explorer", "Local", TRUE
+    }
+{% else -%}
 ; Base vision range - radius of vision is sqrt(5) = 2.24 - this is intentionally smaller than the city working area
 [effect_city_vision]
 type    = "City_Vision_Radius_Sq"
@@ -356,6 +375,7 @@ reqs    =
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
     }
+{%- endif %}
 
 ; Movement penalty if ended turn at mountains (for every land unit)
 [effect_mountains_movement]

@@ -13,6 +13,13 @@
         },
         "explosiveExpansion": {
             "enabled": true
+        }, 
+        "blindWorld": {
+            "enabled": true,
+            "blindVisionRadius": 0,
+            "nonBlindSurfaceVisionRadius": 2,
+            "nonBlindAirVisionRadius": 5,
+            "surfaceMountainVisionBonus": 1
         }
     }
 }
