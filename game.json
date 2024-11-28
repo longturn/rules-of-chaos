@@ -10,6 +10,9 @@
             "baseCityPollution": 1,
             "globalWarmingAccumulationFactor": 5.0,
             "pollutionProductionIncrease": 1
+        },
+        "explosiveExpansion": {
+            "enabled": true
         }
     }
 }

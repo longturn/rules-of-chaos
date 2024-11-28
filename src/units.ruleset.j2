@@ -283,6 +283,14 @@ hp_loss_pct   = 0
 hut_behavior  = "Frighten"
 flags         = "Unreachable", "DoesntOccupyTile", "CanPillage", "Airliftable"
 
+[unitclass_levitating]
+; /* TRANS: Unit class: used adjectivally */
+name          = _("?unitclass:Levitating")
+min_speed     = 1
+hp_loss_pct   = 0
+flags         = "CanPillage", "BuildAnywhere", "CollectRansom", "ZOC", 
+                "AttackNonNative", "AttFromNonNative"
+
 ; /* <-- avoid gettext warnings
 ;
 ; Below: The individual unit types, one per section.
@@ -541,6 +549,55 @@ flags         = "Unreachable", "DoesntOccupyTile", "CanPillage", "Airliftable"
     {{ "Provoking" if provokingChance is successful else "" }}
 {%- endmacro %}
 
+{% if features.explosiveExpansion.enabled -%}
+[unit_explosive_settlers]
+name          = _("Explosive Settlers")
+class         = "Levitating"
+tech_req      = "None"
+obsolete_by   = "None"
+graphic       = "u.settlers"
+graphic_alt   = "-"
+sound_move    = "m_settlers"
+sound_move_alt = "m_generic"
+sound_fight   = "f_settlers"
+sound_fight_alt = "f_generic"
+build_cost    = 30
+pop_cost      = 2
+attack        = 99
+defense       = 0
+hitpoints     = 10
+firepower     = 1
+move_rate     = 1
+vision_radius_sq = 18
+transport_cap = 0
+fuel          = 0
+uk_happy      = 0
+uk_shield     = 1
+uk_food       = 0
+uk_gold       = 1
+flags         = {{ build_flags("Settlers", "Cant_Fortify", "OneAttack", 
+                       "Nuclear", "HasNoZOC", "AddToCity", "Cities",
+                       "Unbribable", maybe_provoking()) }}
+; No veteran levels (level name is never displayed)
+veteran_names = _("green")
+veteran_base_raise_chance = 0
+veteran_work_raise_chance = 0
+veteran_power_fact = 100
+veteran_move_bonus = 0
+roles         = "CitiesStartUnit"
+helptext      = _("\
+Settlers are one of the key units in the game, as they are your main \
+means of founding new cities.\
+"), _("\
+Settlers can also perform some of the same terrain alterations as \
+Workers (but cannot build airstrips, airbases, or buoys).\
+"), _("\
+TIP: optimal production of Settlers occurs in cities of at most \
+size 4, or cities with a Granary of at most size 6.\
+"), _("\
+These settlers are highly volatile, and hover just above the ground.
+")
+{%- else %}
 [unit_settlers]
 name          = _("Settlers")
 class         = "Small Land"
@@ -584,6 +641,7 @@ Workers (but cannot build airstrips, airbases, or buoys).\
 TIP: optimal production of Settlers occurs in cities of at most \
 size 4, or cities with a Granary of at most size 6.\
 ")
+{%- endif %}
 
 [unit_migrants]
 name          = _("Migrants")
@@ -3018,8 +3076,12 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = ""
 helptext      = _("\
-You can build the Nuclear Bomb unit when you have the required advance, and\
- the Manhattan Project wonder has been built by any player.\
+You can build the Nuclear Bomb unit when you have the required advance
+{%- if not features.explosiveExpansion -%}
+                                                                      , and\
+ the Manhattan Project wonder has been built by any player
+{%- endif -%}
+                                                          .\
  However, without further technology the nuclear units cannot move on their own. \
  The Nuclear Bomb is unique and each nation can have only one at a time.\
 "), _("\
@@ -3083,8 +3145,12 @@ veteran_power_fact = 100
 veteran_move_bonus = 0
 roles         = ""
 helptext      = _("\
-You can build Nuclear units when you have the required advance, and\
- the Manhattan Project wonder has been built by any player.\
+You can build Nuclear units when you have the required advance
+{%- if not features.explosiveExpansion -%}
+                                                              , and\
+ the Manhattan Project wonder has been built by any player
+{%- endif -%}
+                                                          .\
  However, without further technology they cannot move on their own.\
 "), _("\
 With Advanced Flight, all Nuclear units (including those already\
