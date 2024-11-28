@@ -352,6 +352,7 @@ reqs    =
       "UnitClass", "Sea", "Local", FALSE
       "UnitClass", "Trireme", "Local", FALSE
       "UnitClass", "Helicopter", "Local", FALSE
+      "UnitClass", "Levitating", "Local", FALSE
       "UnitClass", "Air", "Local", FALSE
       "UnitClass", "Missile", "Local", FALSE
     }
@@ -4367,6 +4368,14 @@ reqs	=
       "Building", "Magellan's Expedition", "City"
     }
 
+{% if features.explosiveExpansion.enabled -%}
+[effect_nukes_from_start]
+type    = "Enable_Nuke"
+value   = 1
+reqs    =
+    { "type", "name", "range", "survives"
+    }
+{% else -%}
 [effect_manhattan_project]
 type    = "Enable_Nuke"
 value   = 1
@@ -4374,7 +4383,7 @@ reqs    =
     { "type", "name", "range", "survives"
       "Building", "Manhattan Project", "World", TRUE
     }
-
+{% endif -%}
 
 [effect_manhattan_project_culture]
 type    = "History"
@@ -4675,7 +4684,9 @@ value   = 1
 reqs    =
     { "type", "name", "range", "present", "survives"
       "Building", "United Nations", "World", TRUE, FALSE
+{% if not features.explosiveExpansion.enabled -%}
       "Building", "Manhattan Project", "World", TRUE, TRUE
+{% endif -%}
       "Tech", "Nuclear Fission", "Player", TRUE, FALSE
       "Building", "Apollo Program", "World", FALSE, TRUE
     }

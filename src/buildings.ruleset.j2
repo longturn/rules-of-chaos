@@ -1983,8 +1983,7 @@ Gives all your sea units 1 additional movement point. The chance\
  increases by half.\
 ")
 
-
-
+{% if not features.explosiveExpansion.enabled -%}
 [building_manhattan_project]
 name		= _("Manhattan Project")
 genus		= "GreatWonder"
@@ -2010,8 +2009,7 @@ Fission advance is required to build the early Nuclear Bomb, which is unique to 
 each nation can have only one at a time. The Robotics advance is required to build the \
 later Nuclear units, which are not limited in number.
 ")
-
-
+{% endif -%}
 
 [building_marco_polos_embassy]
 name		= _("Marco Polo's Embassy")
@@ -2391,7 +2389,11 @@ sound_alt	= "w_generic"
 helptext	= _("\
 Creates a world senate that prevents unprovoked declaration of war by \
 any nuclear-capable nation (that is, any nation with knowledge of \
-Nuclear Fission, once the Manhattan Project has been built). \
+Nuclear Fission
+{%- if not features.explosiveExpansion.enabled -%}
+               , once the Manhattan Project has been built
+{%- endif -%}
+                                                          ). \
 AI players are more inclined to be friendly and forgiving toward the \
 owner of this wonder. These effects last until the Apollo Program \
 is completed.\
