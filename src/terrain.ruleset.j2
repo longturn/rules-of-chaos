@@ -1663,57 +1663,59 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 ;
 ; */ <-- avoid gettext warnings
 
+{%- set powerfulSpecials = features.powerfulSpecials.enabled -%}
+
 [resource_gold]
 extra       = "Gold"
 identifier  = "$"
-trade       = 6
+trade       = {{ 30 if powerfulSpecials else 6 }}
 # glacier, hills, mountains.
 
 [resource_iron]
 extra       = "Iron"
 identifier  = "/"
-shield      = 4
+shield      = {{ 24 if powerfulSpecials else 4 }}
 # mountains.
 
 [resource_game]
 extra       = "Game"
 identifier  = "e"
-food        = 3
-shield      = 1
-trade		= 2
+food        = {{ 6 if powerfulSpecials else 3 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade		= {{ 10 if powerfulSpecials else 2 }}
 # tundra.
 
 [resource_furs]
 extra       = "Furs"
 identifier  = "u"
-food        = 1
-shield      = 1
-trade       = 4
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # tundra-only (beaver pelts).
 
 [resource_coal]
 extra       = "Coal"
 identifier  = "c"
-shield      = 2
+shield      = {{ 22 if powerfulSpecials else 2 }}
 # hills.
 
 [resource_fish]
 extra       = "Fish"
 identifier  = "y"
-food        = 2
+food        = {{ 6 if powerfulSpecials else 2 }}
 # ocean.
 
 [resource_fruit]
 extra       = "Fruit"
 identifier  = "f"
-food        = 3
-trade       = 1
+food        = {{ 7 if powerfulSpecials else 3 }}
+trade       = {{ 13 if powerfulSpecials else 1 }}
 # jungle.
 
 [resource_gems]
 extra       = "Gems"
 identifier  = "g"
-trade       = 4
+trade       = {{ 28 if powerfulSpecials else 4 }}
 # jungle.
 
 ; "h" reserved for strategic horses
@@ -1721,13 +1723,13 @@ trade       = 4
 [resource_buffalo]
 extra       = "Buffalo"
 identifier  = "b"
-shield      = 2
+shield      = {{ 14 if powerfulSpecials else 2 }}
 # plains (horses => buffalo => cattle).
 
 [resource_wheat]
 extra       = "Wheat"
 identifier  = "j"
-food        = 2
+food        = {{ 6 if powerfulSpecials else 2 }}
 # plains.
 
 ; "k" reserved for (cane) sugar
@@ -1739,20 +1741,20 @@ food        = 2
 [resource_oasis]
 extra       = "Oasis"
 identifier  = "o"
-food        = 3
-trade       = 4
+food        = {{ 7 if powerfulSpecials else 3 }}
+trade       = {{ 24 if powerfulSpecials else 4 }}
 # desert.
 
 [resource_peat]
 extra       = "Peat"
 identifier  = "a"
-shield      = 4
+shield      = {{ 20 if powerfulSpecials else 4 }}
 # swamp (petroleum => peat => petroleum).
 
 [resource_pheasant]
 extra       = "Pheasant"
 identifier  = "p"
-food        = 2
+food        = {{ 5 if powerfulSpecials else 2 }}
 # forest, forested.
 
 ; "r" reserved for rubber
@@ -1760,28 +1762,28 @@ food        = 2
 [resource_bonus]
 extra       = "Resources"
 identifier  = "r"
-shield      = 1
+shield      = {{ 5 if powerfulSpecials else 1 }}
 # grassland.
 
 [resource_icy_ivory]
 extra       = "Ivory"
 identifier  = "i"
-food        = 1
-shield      = 1
-trade       = 4
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # glacier (seals => walrus).
 
 [resource_silk]
 extra       = "Silk"
 identifier  = "s"
-trade       = 3
+trade       = {{ 15 if powerfulSpecials else 3 }}
 # forest, wooded.
 
 [resource_spice]
 extra       = "Spice"
 identifier  = "t"
-food        = 2
-trade       = 4
+food        = {{ 5 if powerfulSpecials else 2 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # swamp-only.
 
 ; "u" reserved for uranium
@@ -1789,20 +1791,20 @@ trade       = 4
 [resource_whales]
 extra       = "Whales"
 identifier  = "v"
-food        = 1
-shield      = 1
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
 # ocean (sea).
 
 [resource_wine]
 extra       = "Wine"
 identifier  = "w"
-trade       = 4
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # hills-only.
 
 [resource_oil]
 extra       = "Oil"
 identifier  = "x"
-shield      = 3 ; glacier used to have 4
+shield      = {{ 27 if powerfulSpecials else 3 }} ; glacier used to have 4
 # glacier, desert
 
 
