@@ -13,6 +13,9 @@
         },
         "explosiveExpansion": {
             "enabled": true
+        },
+        "powerfulSpecials": {
+            "enabled": true
         }
     }
 }
