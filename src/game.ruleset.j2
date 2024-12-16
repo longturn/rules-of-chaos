@@ -778,14 +778,14 @@ target_reqs    =
       "MaxUnitsOnTile", "1", "Local", TRUE
     }
 
-#[actionenabler_traderoute]
-#action = "Establish Trade Route"
-#actor_reqs    =
-#    { "type",   "name", "range", "present"
-#      "UnitFlag", "TradeRoute", "Local", TRUE
-#      "MinMoveFrags", "1", "Local", TRUE
-#      "UnitState", "HasHomeCity", "Local", TRUE
-#    }
+;[actionenabler_traderoute]
+;action = "Establish Trade Route"
+;actor_reqs    =
+;    { "type",   "name", "range", "present"
+;      "UnitFlag", "TradeRoute", "Local", TRUE
+;      "MinMoveFrags", "1", "Local", TRUE
+;      "UnitState", "HasHomeCity", "Local", TRUE
+;    }
 
 [actionenabler_help_build_wonder]
 action = "Help Wonder"
@@ -1849,27 +1849,130 @@ colorlist =
 [settings]
 ; freeciv game settings for civ2civ3 ruleset
 ;
-set =
-    { "name", "value"
-     "aifill", 6
-      "generator", "FRACTAL"
-      "topology", "WRAPX|WRAPY|ISO"
-      "mapsize", "PLAYER"
-      "tilesperplayer", 100
-      "tinyisles", "ENABLED"
-      "temperature", 60
-      "flatpoles", 0
-      "startunits", "cwsx"
-      "citymindist", 3
-      "techlevel", 1
-      "borders", "ENABLED"
-      "foggedborders", "ENABLED"
-      "restrictinfra", "ENABLED"
-      "unreachableprotects", "DISABLED"
-      "onsetbarbs", 120
-      "occupychance", 100
-      "razechance", 10
-      "techlossforgiveness", 0
-      "techlossrestore", 50
-      "revolentype", "FIXED"
+set = { 
+"name", "value"
+
+; map
+"mapsize", "PLAYER"
+"generator", "FRACTURE"
+"startpos", "VARIABLE"
+"huts", 0
+"landmass", 40
+"separatepoles", "enabled"
+"specials", 300
+"steepness", 45
+"temperature", 60
+"tilesperplayer", 400
+"flatpoles", 0
+"topology", "WRAPX|WRAPY|ISO|HEX"
+"wetness", 60
+"alltemperate", "disabled"
+"tinyisles", "disabled"
+
+; starting conditions
+"dispersion", 6
+"teamplacement", "CLOSEST"
+"startunits", "cccccwwwwwwxx"
+"techlevel", 0
+"gold", 50
+
+; barbarians
+"barbarians", "disabled"
+"onsetbarbs", 120
+
+; climate and disasters
+{% set climates = features.inaccessibleClimates -%}
+{% set gw_factor = climates.globalWarmingAccumulationFactor 
+                       if climates.enabled else 1 -%}
+"disasters", 10
+"globalwarming", "ENABLED"
+"globalwarming_percent", {{ 40 * gw_factor | int }}
+"nuclearwinter", "ENABLED"
+"nuclearwinter_percent", 100
+
+; civil war and revolution
+"revolen", 2
+"revolentype", "FIXED"
+"civilwarsize", 10
+
+; cities
+"citymindist", 5
+"rapturedelay", 3
+"aqueductloss", 0
+"citynames", "PLAYER_UNIQUE"
+"naturalcitynames", "ENABLED"
+"notradesize", 0
+"fulltradesize", 1
+
+; migration
+"migration", "ENABLED"
+"mgr_distance", 6
+"mgr_foodneeded", "ENABLED"
+"mgr_nationchance", 50
+"mgr_turninterval", 1
+"mgr_worldchance", 30
+
+; military and combat
+"airliftingstyle", "FROM_ALLIES|TO_ALLIES|DEST_UNLIMITED"
+"unreachableprotects", "DISABLED"
+"killstack", "ENABLED"
+"killunhomed", 0
+"homecaughtunits", "ENABLED"
+"occupychance", 0
+{% if features.impetuousUnits.enabled -%}
+    "autoattack", "ENABLED"
+{%- else -%}
+    "autoattack", "DISABLED"
+{%- endif %}
+
+; siege and conquest
+"killcitizen", "ENABLED"
+"razechance", 10
+"savepalace", "ENABLED"
+"conquercost", 30 ; for getting techs with tech stealing/trading units
+
+; trade routes
+"caravan_bonus_style", "CLASSIC"
+"trade_revenue_style", "CLASSIC"
+"trademindist", 999
+"tradeworldrelpct", 50
+
+; victory
+"victories", "SPACERACE|ALLIED"
+"endspaceship", "ENABLED"
+"spaceship_travel_time", 200
+"endturn", 5000
+
+; technology
+"sciencebox", 100
+"techleak", 150
+"techpenalty", 10
+"techlossforgiveness", -1
+"techlossrestore", 50
+"freecost", 0 ; for getting techs from philosphy etc
+"multiresearch", "DISABLED"
+
+; diplomacy
+"diplomacy", "HUMAN"
+"contactturns", 1
+"trading_tech", "disabled"
+"trading_gold", "ENABLED"
+"trading_city", "disabled"
+"team_pooled_research", "disabled"
+"techlost_donor", 0
+"techlost_recv", 0
+
+; espionage
+"diplchance", 40
+"diplgoldcost", 40
+"diplbulbcost", 20
+"incite_gold_capt_chance", 0
+"incite_gold_loss_chance", 0
+"demography", "NnciwASLaMklOCqrbszPE"
+
+; borders
+"borders", "ENABLED"
+"happyborders", "NATIONAL"
+"foggedborders", "enabled"
+"restrictinfra", "ENABLED"
     }
