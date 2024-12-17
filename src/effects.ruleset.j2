@@ -4403,7 +4403,6 @@ reqs    =
     { "type", "name", "range", "survives"
       "Building", "Manhattan Project", "World", TRUE
     }
-{% endif -%}
 
 [effect_manhattan_project_culture]
 type    = "History"
@@ -4412,7 +4411,7 @@ reqs	=
     { "type", "name", "range"
       "Building", "Manhattan Project", "City"
     }
-
+{% endif -%}
 
 [effect_michelangelos_chapel]
 type    = "Make_Content"
@@ -5008,7 +5007,7 @@ reqs    =
 {% if features.inaccessibleClimates.enabled %}
 
 [effect_pollution]
-type    = "Outfput_Add_Tile"
+type    = "Output_Add_Tile"
 value   = {{ features.inaccessibleClimates.pollutionProductionIncrease }}
 reqs    =
     { "type", "name", "range", "present"

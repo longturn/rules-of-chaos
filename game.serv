@@ -1,0 +1,42 @@
+# Technical settings
+set compresstype "LIBZ"
+set ec_chat "enabled"
+set ec_info "enabled" 
+set ec_max_size "5000"
+set ec_turns "9"
+set maxconnectionsperhost "4"
+set autosaves "TURN|GAMEOVER|QUITIDLE|INTERRUPT"
+set saveturns "1"
+set savefrequency "15"
+set savename "freeciv"
+set kicktime "1800"
+set scorefile "freeciv-score.log"
+set scorelog "ENABLED"
+set scoreloglevel "ALL"
+set netwait "4"
+set pingtime "20"
+set pingtimeout "60"
+set threaded_save "DISABLED"
+
+# Longturn settings
+set unitwaittime_style ACTIVITIES
+set unitwaittime 36000 # 10 hours
+set fixedlength ENABLED
+set phasemode ALL
+set turnblock ENABLED
+set first_timeout 176400 # 49 hours
+set timeout 90000 # 25 hours
+set fogofwar ENABLED
+
+# Player settings
+set aifill 20
+set maxplayers 500
+set minplayers 1
+set allowtake ""
+set nationset all
+set persistentready DISABLED
+set plrcolormode PLR_ORDER
+set autotoggle DISABLED
+set traitdistribution FIXED
+cmdlevel info
+

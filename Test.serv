@@ -1,0 +1,19 @@
+# Server commands to make Longturn Extended Experimental Freeciv rules based on Civ2Civ3 ruleset
+#
+
+rulesetdir Chaos
+
+read game.serv
+
+# Longturn test game settings
+set unitwaittime 10 # 10 sec
+set fixedlength DISABLED
+set first_timeout 600 # 10 mins
+set timeout 120 # 2 mins
+set fogofwar DISABLED
+set revealmap START
+set startcity ENABLED
+
+read players.serv
+hard
+start
