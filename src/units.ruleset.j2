@@ -46,6 +46,9 @@ flags =
     _("Cant_Fortify")
     _("RealSpy"), _("Can do real spy actions, unlike tech transfer units.")
     _("RealDiplomat"), _("Can do real diplomat actions, unlike tech transfer units.")
+{%- if features.blindWorld.enabled %}
+    _("OneEye"), _("In the world of the blind, the one-eyed man is king.")
+{% endif -%}
   }
 
 ; Names for custom unit class flags. There can be up to 12 of these.
@@ -69,7 +72,9 @@ class_flags =
 ; value of 15, the server has to check close to 1000 tiles every time a unit
 ; moves). It is recommended to set this to the largest possible distance that
 ; a unit can see in the rules.
-sentry_range = 15 ; AWACS vision radius
+sentry_range = {{ features.blindWorld.nonBlindAirVisionRadius 
+                      if features.blindWorld.enabled 
+                      else 15 }} ; AWACS vision radius
 
 [veteran_system]
 ; What are the names of the levels?
@@ -565,6 +570,16 @@ flags         = "CanPillage", "BuildAnywhere", "CollectRansom", "ZOC",
     {{ features.blindWorld.nonBlindAirVisionRadius ** 2
            if features.blindWorld.enabled
            else radius_sq }}
+{%- endmacro -%}
+
+{%- macro vision_non_blind_underwater(radius_sq) -%}
+    {{ features.blindWorld.nonBlindUnderwaterVisionRadius ** 2
+           if features.blindWorld.enabled
+           else radius_sq }}
+{%- endmacro -%}
+
+{%- macro one_eye() -%}
+    {{ "OneEye" if features.blindWorld.enabled else "" }}
 {%- endmacro -%}
 
 {% if features.explosiveExpansion.enabled -%}
@@ -2244,7 +2259,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "HasNoZOC", maybe_provoking(), one_eye()) }}
 roles         = ""
 helptext      = _("\
 The Pirogue is your first unit able to truly explore the oceans\
@@ -2282,7 +2298,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "HasNoZOC", maybe_provoking(), one_eye()) }}
 roles         = ""
 helptext      = _("\
 The Cog is your second unit able explore the oceans without the limitations from supplies.\
@@ -2318,7 +2335,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 1
 uk_gold       = 1
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "HasNoZOC", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "HasNoZOC", maybe_provoking(), one_eye()) }}
 roles         = ""
 helptext      = _("\
 The patrol cutter is a modern ship able to patrol the oceans and warn you about the enemy vessels trying to lurk into your native waters.\
@@ -2699,7 +2717,7 @@ defense       = 4
 hitpoints     = 20
 firepower     = 1
 move_rate     = 12
-vision_radius_sq = {{ vision_blind(28) }}
+vision_radius_sq = {{ vision_non_blind_underwater(28) }}
 transport_cap = 1
 fuel          = 6
 uk_happy      = 0
@@ -2708,7 +2726,8 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile"
 vision_layer  = "Subsurface"
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "Submarine", maybe_provoking(), one_eye()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have\
@@ -2736,7 +2755,7 @@ defense       = 4
 hitpoints     = 20
 firepower     = 1
 move_rate     = 14
-vision_radius_sq = {{ vision_blind(28) }}
+vision_radius_sq = {{ vision_non_blind_underwater(28) }}
 transport_cap = 4
 fuel          = 10
 uk_happy      = 0
@@ -2745,7 +2764,8 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile", "Nuclear", "Small Sea"
 vision_layer  = "Subsurface"
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "Submarine", "NoHome", maybe_provoking(), one_eye()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling under the surface of the ocean, Submarines have\
@@ -2778,7 +2798,7 @@ defense       = 6
 hitpoints     = 20
 firepower     = 1
 move_rate     = 16
-vision_radius_sq = {{ vision_blind(28) }}
+vision_radius_sq = {{ vision_non_blind_underwater(28) }}
 transport_cap = 2
 fuel          = 0
 uk_happy      = 0
@@ -2787,7 +2807,8 @@ uk_food       = 1
 uk_gold       = 1
 cargo         = "Missile", "Nuclear", "Small Sea"
 vision_layer  = "Subsurface"
-flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack", "Submarine", "NoHome", maybe_provoking()) }}
+flags         = {{ build_flags("BadCityDefender", "Only_Native_Attack",
+    "Submarine", "NoHome", maybe_provoking(), one_eye()) }}
 roles         = "Hunter"
 helptext      = _("\
 Traveling deep under the surface of the ocean, these new Nuclear Submarines have\
@@ -3327,7 +3348,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = {{ build_flags("Diplomat", "RealDiplomat","IgZOC", "NonMil", "HasNoZOC", "Spy", "RealSpy", maybe_provoking()) }}
+flags         = {{ build_flags("Diplomat", "RealDiplomat","IgZOC", "NonMil",
+    "HasNoZOC", "Spy", "RealSpy", maybe_provoking(), one_eye()) }}
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -3394,7 +3416,8 @@ uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
 vision_layer  = "Stealth"
-flags         = {{ build_flags("Diplomat", "RealDiplomat", "IgZOC", "NonMil", "HasNoZOC", "Spy", "IgTer", "RealSpy", maybe_provoking()) }}
+flags         = {{ build_flags("Diplomat", "RealDiplomat", "IgZOC", "NonMil",
+    "HasNoZOC", "Spy", "IgTer", "RealSpy", maybe_provoking(), one_eye()) }}
 veteran_names =
 ; /* TRANS: Spy veteran level */
   _("?spy_level:informant"),
@@ -3720,7 +3743,8 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = {{ build_flags("IgTer", "IgZOC", "NonMil", "HasNoZOC", "Cant_Fortify", maybe_provoking()) }}
+flags         = {{ build_flags("IgTer", "IgZOC", "NonMil", "HasNoZOC",
+    "Cant_Fortify", maybe_provoking(), one_eye()) }}
 roles         = "Explorer", "ExplorerStartUnit"
 helptext      = _("\
 Explorers are brave individuals that are very useful for\
@@ -3849,7 +3873,7 @@ uk_happy      = 0
 uk_shield     = 1
 uk_food       = 0
 uk_gold       = 1
-flags         = {{ build_flags("HasNoZOC", maybe_provoking()) }}
+flags         = {{ build_flags("HasNoZOC", maybe_provoking(), one_eye()) }}
 roles         = ""
 helptext      = _("\
 The AWACS (Airborne Warning and Control System) is an airplane with an \
