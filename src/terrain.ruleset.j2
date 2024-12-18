@@ -2991,7 +2991,12 @@ flags          = "NoAggressive"
 [base_buoy]
 extra          = "Buoy"
 gui_type       = "Fortress"
+{% if features.blindWorld.enabled -%}
+vision_main_sq = {{ features.blindWorld.blindVisionRadius }}
+vision_subs_sq = {{ features.blindWorld.blindVisionRadius }}
+{%- else -%}
 vision_main_sq = 18
+{%- endif %}
 
 ; /* <-- avoid gettext warnings
 ;
