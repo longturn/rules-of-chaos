@@ -29,6 +29,7 @@ flags =
     _("Sea"), _("Allows cities to build Harbors and coastal wonders.")
     _("NoPollution"), _("No Pollution nor Fallout appear here.")
     _("NoFortify"), _("No units can fortify on this terrain.")
+    _("Unworkable"), _("Terrain cannot be worked by cities.")
   }
 
 ; Names for custom extra flags. There can be up to 8 of these.
@@ -254,7 +255,8 @@ warmer_wetter_result = "no"
 warmer_drier_result  = "no"
 cooler_wetter_result = "no"
 cooler_drier_result  = "no"
-flags                = "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast", "Frozen"
+flags                = "NotGenerated", "NoPollution", "NoCities", 
+    "UnsafeCoast", "Frozen", "Unworkable"
 color.r              = 25
 color.g              = 25
 color.b              = 25
@@ -299,7 +301,8 @@ warmer_wetter_result = "Lake"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
-flags                = "NotGenerated", "NoPollution", "NoCities", "NoBarbs", "NoZoc", "NoFortify", "UnsafeCoast"
+flags                = "NotGenerated", "NoPollution", "NoCities", "NoBarbs",
+    "NoZoc", "NoFortify", "UnsafeCoast", "Unworkable"
 property_ocean_depth = 0
 color.r              = 36
 color.g              = 73
@@ -345,7 +348,8 @@ warmer_wetter_result = "Ocean"
 warmer_drier_result  = "Swamp"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Glacier"
-flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea", "NotGenerated", "NoPollution"
+flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea",
+    "NotGenerated", "NoPollution", "Unworkable"
 property_ocean_depth = 35
 color.r              = 12
 color.g              = 36
@@ -392,7 +396,8 @@ warmer_wetter_result = "Deep Ocean"
 warmer_drier_result  = "Deep Ocean"
 cooler_wetter_result = "Deep Ocean"
 cooler_drier_result  = "Deep Ocean"
-flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea", "NotGenerated", "NoPollution"
+flags                = "NoCities", "UnsafeCoast", "NoZoc", "NoFortify", "Sea",
+    "NotGenerated", "NoPollution", "Unworkable"
 property_ocean_depth = 70
 color.r              = 13
 color.g              = 29
@@ -439,7 +444,8 @@ warmer_wetter_result = "Tundra"
 warmer_drier_result  = "Tundra"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Glacier"
-flags                = "NoBarbs", "CanHaveRiver", "Oil", "Frozen", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "NoBarbs", "CanHaveRiver", "Oil", "Frozen",
+    "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast", "Unworkable"
 property_frozen      = 100
 color.r              = 129
 color.g              = 129
@@ -487,7 +493,8 @@ warmer_wetter_result = "Plains"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Desert"
-flags                = "CanHaveRiver", "Oil", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "Oil", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_dry         = 100
 property_tropical    = 50
 property_temperate   = 20
@@ -540,7 +547,8 @@ warmer_wetter_result = "Jungle"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Swamp"
 cooler_drier_result  = "Tundra"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_cold        = 20
 property_wet         = 20
 property_foliage     = 50
@@ -590,7 +598,8 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Tundra"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_green       = 50
 property_temperate   = 50
 color.r              = 18
@@ -637,7 +646,8 @@ warmer_wetter_result = "Hills"
 warmer_drier_result  = "Hills"
 cooler_wetter_result = "Hills"
 cooler_drier_result  = "Hills"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_green       = 50
 property_mountainous = 30
 color.r              = 25
@@ -688,7 +698,8 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Forest"
 cooler_drier_result  = "Tundra"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_foliage     = 50
 property_tropical    = 50
 property_wet         = 50
@@ -738,7 +749,8 @@ warmer_wetter_result = "Mountains"
 warmer_drier_result  = "Mountains"
 cooler_wetter_result = "Mountains"
 cooler_drier_result  = "Mountains"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_mountainous = 70
 color.r              = 77
 color.g              = 76
@@ -790,7 +802,8 @@ warmer_wetter_result = "Grassland"
 warmer_drier_result  = "Desert"
 cooler_wetter_result = "Tundra"
 cooler_drier_result  = "Desert"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_green       = 50
 property_temperate   = 50
 color.r              = 74
@@ -838,7 +851,8 @@ warmer_wetter_result = "Ocean"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Tundra"
-flags                = "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "CanHaveRiver", "NotGenerated", "NoPollution",
+    "NoCities", "UnsafeCoast", "Unworkable"
 property_wet         = 100
 property_tropical    = 10
 property_temperate   = 10
@@ -889,7 +903,8 @@ warmer_wetter_result = "Swamp"
 warmer_drier_result  = "Plains"
 cooler_wetter_result = "Glacier"
 cooler_drier_result  = "Desert"
-flags                = "NoBarbs", "CanHaveRiver", "NotGenerated", "NoPollution", "NoCities", "UnsafeCoast"
+flags                = "NoBarbs", "CanHaveRiver", "NotGenerated",
+    "NoPollution", "NoCities", "UnsafeCoast", "Unworkable"
 property_cold        = 50
 color.r              = 107
 color.g              = 107
@@ -1663,57 +1678,59 @@ Tundra are broad, cold regions, fit for some agriculture and little\
 ;
 ; */ <-- avoid gettext warnings
 
+{%- set powerfulSpecials = features.powerfulSpecials.enabled %}
+
 [resource_gold]
 extra       = "Gold"
 identifier  = "$"
-trade       = 6
+trade       = {{ 30 if powerfulSpecials else 6 }}
 # glacier, hills, mountains.
 
 [resource_iron]
 extra       = "Iron"
 identifier  = "/"
-shield      = 4
+shield      = {{ 24 if powerfulSpecials else 4 }}
 # mountains.
 
 [resource_game]
 extra       = "Game"
 identifier  = "e"
-food        = 3
-shield      = 1
-trade		= 2
+food        = {{ 6 if powerfulSpecials else 3 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade		= {{ 10 if powerfulSpecials else 2 }}
 # tundra.
 
 [resource_furs]
 extra       = "Furs"
 identifier  = "u"
-food        = 1
-shield      = 1
-trade       = 4
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # tundra-only (beaver pelts).
 
 [resource_coal]
 extra       = "Coal"
 identifier  = "c"
-shield      = 2
+shield      = {{ 22 if powerfulSpecials else 2 }}
 # hills.
 
 [resource_fish]
 extra       = "Fish"
 identifier  = "y"
-food        = 2
+food        = {{ 6 if powerfulSpecials else 2 }}
 # ocean.
 
 [resource_fruit]
 extra       = "Fruit"
 identifier  = "f"
-food        = 3
-trade       = 1
+food        = {{ 7 if powerfulSpecials else 3 }}
+trade       = {{ 13 if powerfulSpecials else 1 }}
 # jungle.
 
 [resource_gems]
 extra       = "Gems"
 identifier  = "g"
-trade       = 4
+trade       = {{ 28 if powerfulSpecials else 4 }}
 # jungle.
 
 ; "h" reserved for strategic horses
@@ -1721,13 +1738,13 @@ trade       = 4
 [resource_buffalo]
 extra       = "Buffalo"
 identifier  = "b"
-shield      = 2
+shield      = {{ 14 if powerfulSpecials else 2 }}
 # plains (horses => buffalo => cattle).
 
 [resource_wheat]
 extra       = "Wheat"
 identifier  = "j"
-food        = 2
+food        = {{ 6 if powerfulSpecials else 2 }}
 # plains.
 
 ; "k" reserved for (cane) sugar
@@ -1739,20 +1756,20 @@ food        = 2
 [resource_oasis]
 extra       = "Oasis"
 identifier  = "o"
-food        = 3
-trade       = 4
+food        = {{ 7 if powerfulSpecials else 3 }}
+trade       = {{ 24 if powerfulSpecials else 4 }}
 # desert.
 
 [resource_peat]
 extra       = "Peat"
 identifier  = "a"
-shield      = 4
+shield      = {{ 20 if powerfulSpecials else 4 }}
 # swamp (petroleum => peat => petroleum).
 
 [resource_pheasant]
 extra       = "Pheasant"
 identifier  = "p"
-food        = 2
+food        = {{ 5 if powerfulSpecials else 2 }}
 # forest, forested.
 
 ; "r" reserved for rubber
@@ -1760,28 +1777,28 @@ food        = 2
 [resource_bonus]
 extra       = "Resources"
 identifier  = "r"
-shield      = 1
+shield      = {{ 5 if powerfulSpecials else 1 }}
 # grassland.
 
 [resource_icy_ivory]
 extra       = "Ivory"
 identifier  = "i"
-food        = 1
-shield      = 1
-trade       = 4
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # glacier (seals => walrus).
 
 [resource_silk]
 extra       = "Silk"
 identifier  = "s"
-trade       = 3
+trade       = {{ 15 if powerfulSpecials else 3 }}
 # forest, wooded.
 
 [resource_spice]
 extra       = "Spice"
 identifier  = "t"
-food        = 2
-trade       = 4
+food        = {{ 5 if powerfulSpecials else 2 }}
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # swamp-only.
 
 ; "u" reserved for uranium
@@ -1789,20 +1806,20 @@ trade       = 4
 [resource_whales]
 extra       = "Whales"
 identifier  = "v"
-food        = 1
-shield      = 1
+food        = {{ 4 if powerfulSpecials else 1 }}
+shield      = {{ 5 if powerfulSpecials else 1 }}
 # ocean (sea).
 
 [resource_wine]
 extra       = "Wine"
 identifier  = "w"
-trade       = 4
+trade       = {{ 20 if powerfulSpecials else 4 }}
 # hills-only.
 
 [resource_oil]
 extra       = "Oil"
 identifier  = "x"
-shield      = 3 ; glacier used to have 4
+shield      = {{ 27 if powerfulSpecials else 3 }} ; glacier used to have 4
 # glacier, desert
 
 
