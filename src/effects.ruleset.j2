@@ -4830,28 +4830,22 @@ value   = 3
 type    = "Tech_Cost_Factor"
 value   = 3
 
-; Cities can always work tiles
+; Cities can work all accessible tiles
 [effect_tile_workable]
 type    = "Tile_Workable"
 value   = 1
 reqs    =
-    { "type", "name", "range", "present"
-      "Terrain", "Inaccessible", "Local", FALSE
-{%- if features.inaccessibleClimates.enabled %}
-      "Terrain", "Inaccessible Deep Ocean", "Local", FALSE
-      "Terrain", "Inaccessible Desert", "Local", FALSE
-      "Terrain", "Inaccessible Forest", "Local", FALSE
-      "Terrain", "Inaccessible Glacier", "Local", FALSE
-      "Terrain", "Inaccessible Grassland", "Local", FALSE
-      "Terrain", "Inaccessible Hills", "Local", FALSE
-      "Terrain", "Inaccessible Jungle", "Local", FALSE
-      "Terrain", "Inaccessible Lake", "Local", FALSE
-      "Terrain", "Inaccessible Mountains", "Local", FALSE
-      "Terrain", "Inaccessible Ocean", "Local", FALSE
-      "Terrain", "Inaccessible Plains", "Local", FALSE
-      "Terrain", "Inaccessible Swamp", "Local", FALSE
-      "Terrain", "Inaccessible Tundra", "Local", FALSE
-{% endif -%}
+    { "type",        "name",       "range", "present"
+      "TerrainFlag", "Unworkable", "Local", FALSE
+    }
+
+; Inaccessible tiles are unworkable
+[effect_tile_unworkable]
+type    = "Tile_Workable"
+value   = -999
+reqs    =
+    { "type",        "name",       "range", "present"
+      "TerrainFlag", "Unworkable", "Local", TRUE
     }
 
 ; each city has at least one slot to build units

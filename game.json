@@ -6,7 +6,7 @@
             "provokingChance": 0.15
         },
         "inaccessibleClimates": {
-            "enabled": true,
+            "enabled": false,
             "baseCityPollution": 1,
             "globalWarmingAccumulationFactor": 5.0,
             "pollutionProductionIncrease": 1
