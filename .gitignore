@@ -17,4 +17,5 @@ freeciv-score.log
 *.log
 
 __pycache__/
+testbuild/
 

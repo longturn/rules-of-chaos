@@ -1,0 +1,18 @@
+-- Copyright (c) 2007-2020 Freeciv21 and Freeciv contributors. This file is
+--   part of Freeciv21. Freeciv21 is free software: you can redistribute it
+--   and/or modify it under the terms of the GNU General Public License
+--   as published by the Free Software Foundation, either version 3
+--   of the License,  or (at your option) any later version.
+--   You should have received a copy of the GNU General Public License
+--   along with Freeciv21. If not, see https://www.gnu.org/licenses/.
+
+-- This file is for lua-functionality that is specific to a given
+-- ruleset. When freeciv loads a ruleset, it also loads script
+-- file called 'default.lua'. The one loaded if your ruleset
+-- does not provide an override is default/default.lua.
+
+{% include 'src/scripts/place_ruins_at_destroyed_city.lua' %}
+{% include 'src/scripts/add_random_terrain_labels_to_map.lua' %}
+{% if features.invisiblePortals.enabled -%}
+    {% include 'src/scripts/invisible_portals.lua' %}
+{%- endif -%}
