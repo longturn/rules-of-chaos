@@ -9,9 +9,18 @@
 ; Note that the freeciv AI may not cope well with anything more
 ; than minor changes.
 
+{%- macro build_options() -%}
+    {{ varargs | select("ne", "") | join(' ') }}
+{%- endmacro %}
+
 [datafile]
 description="Longturn Traditional based on Civ2Civ3 effects data for Freeciv"
-options="+Freeciv-ruleset-Devel-2017.Jan.02 +Bombard_Limit_Pct +Nation_Intelligence"
+options="{{ build_options(
+    "+Freeciv-ruleset-Devel-2017.Jan.02",
+    "+Bombard_Limit_Pct",
+    "+Nation_Intelligence",
+    "VisionLayer"
+) }}"
 format_version=20
 
 ; /* <-- avoid gettext warnings
@@ -28,6 +37,12 @@ format_version=20
 ;                           See README.effects for help on requirements
 ;
 ; */ <-- avoid gettext warnings
+    
+{%- macro vision_blind(radius_sq) -%}
+    {{ features.blindWorld.blindVisionRadius ** 2
+           if features.blindWorld.enabled
+           else radius_sq }}
+{%- endmacro -%}
 
 ; "Away" "Novice" "Easy" "Normal" "Hard" "Cheating" "Experimental"
 [effect_ai_cheat_food]
@@ -199,19 +214,21 @@ reqs    =
 ; Vision benefit from fortress watchtowers
 [effect_fortress_vision]
 type    = "Unit_Vision_Radius_Sq"
-value   = 18
+value   = {{ vision_blind(18) }}
 reqs    =
-    { "type", "name", "range"
-      "Extra", "Fortress", "Local"
-      "Tech", "Astronomy", "Player"
+    { "type",        "name",      "range"
+      "VisionLayer", "Main",      "Local"
+      "Extra",       "Fortress",  "Local"
+      "Tech",        "Astronomy", "Player"
     }
 
 [effect_airbase_vision]
 type    = "Unit_Vision_Radius_Sq"
-value   = 18
+value   = {{ vision_blind(18) }}
 reqs    =
-    { "type", "name", "range"
-      "Extra", "Airbase", "Local"
+    { "type",        "name",    "range"
+      "VisionLayer", "Main",    "Local"
+      "Extra",       "Airbase", "Local"
     }
 
 
@@ -324,18 +341,75 @@ reqs    =
 type    = "Max_Trade_Routes"
 value   = 0
 
+{% if features.blindWorld.enabled -%}
+; Vision benefit from mountains (for explorer type units only)
+[effect_mountains_vision]
+type    = "Unit_Vision_Radius_Sq"
+{% set smVisBonus = features.blindWorld.surfaceMountainVisionBonus -%}
+{% set nbsVis = features.blindWorld.nonBlindSurfaceVisionRadius -%}
+value   = {{ ((nbsVis + smVisBonus) ** 2) - (nbsVis ** 2) }}
+reqs    =
+    { "type",        "name",      "range", "present"
+      "VisionLayer", "Main",      "Local", TRUE
+      "Terrain",     "Mountains", "Local", TRUE
+      "UnitType",    "Explorer",  "Local", TRUE
+    }
+
+; Blind units can't see invisible units
+[effect_blind_unit_invis_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range", "present"
+      "VisionLayer", "Stealth", "Local", TRUE
+      "UnitFlag",    "OneEye",  "Local", FALSE
+    }
+
+; Blind units can't see subsurface units
+[effect_blind_unit_sub_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range", "present"
+      "VisionLayer", "Subsurface", "Local", TRUE
+      "UnitFlag",    "OneEye",     "Local", FALSE
+    }
+
+; Cities can't see stealth units
+[effect_blind_city_invis_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range"
+      "VisionLayer", "Stealth", "Local"
+    }
+
+; Cities can't see subsurface units
+[effect_blind_city_sub_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range"
+      "VisionLayer", "Subsurface", "Local"
+    }
+{% else -%}
 ; Base vision range - radius of vision is sqrt(5) = 2.24 - this is intentionally smaller than the city working area
 [effect_city_vision]
 type    = "City_Vision_Radius_Sq"
 value   = 5
+reqs    = 
+    { "type",        "name", "range"
+      "VisionLayer", "Main", "Local"
+    }
 
 ; 5 + 5 = 10
 [effect_city_vision_1]
 type    = "City_Vision_Radius_Sq"
 value   = 25
 reqs    =
-    { "type", "name", "range"
-      "Tech", "Electricity", "Player"
+    { "type",        "name",        "range"
+      "VisionLayer", "Main",        "Local"
+      "Tech",        "Electricity", "Player"
     }
 
 ; Vision benefit from mountains (for every land unit)
@@ -343,19 +417,17 @@ reqs    =
 type    = "Unit_Vision_Radius_Sq"
 value   = 18
 reqs    =
-    { "type", "name", "range", "present"
-      "Terrain", "Mountains", "Local", TRUE
-;      "UnitClass", "Land", "Local", FALSE
-;      "UnitClass", "Small Land", "Local", FALSE
-;      "UnitClass", "Big Land", "Local", FALSE
-;      "UnitClass", "Merchant", "Local", FALSE
-      "UnitClass", "Sea", "Local", FALSE
-      "UnitClass", "Trireme", "Local", FALSE
-      "UnitClass", "Helicopter", "Local", FALSE
-      "UnitClass", "Levitating", "Local", FALSE
-      "UnitClass", "Air", "Local", FALSE
-      "UnitClass", "Missile", "Local", FALSE
+    { "type",        "name",       "range", "present"
+      "VisionLayer", "Main",       "Local", TRUE
+      "Terrain",     "Mountains",  "Local", TRUE
+      "UnitClass",   "Sea",        "Local", FALSE
+      "UnitClass",   "Trireme",    "Local", FALSE
+      "UnitClass",   "Helicopter", "Local", FALSE
+      "UnitClass",   "Levitating", "Local", FALSE
+      "UnitClass",   "Air",        "Local", FALSE
+      "UnitClass",   "Missile",    "Local", FALSE
     }
+{%- endif %}
 
 ; Movement penalty if ended turn at mountains (for every land unit)
 [effect_mountains_movement]
