@@ -6,7 +6,7 @@
             "provokingChance": 0.15
         },
         "inaccessibleClimates": {
-            "enabled": true,
+            "enabled": false,
             "baseCityPollution": 1,
             "globalWarmingAccumulationFactor": 5.0,
             "pollutionProductionIncrease": 1
@@ -15,6 +15,17 @@
             "enabled": true
         },
         "invisiblePortals": {
+            "enabled": true
+        }, 
+        "blindWorld": {
+            "enabled": false,
+            "blindVisionRadius": 0,
+            "nonBlindUnderwaterVisionRadius": 1,
+            "nonBlindSurfaceVisionRadius": 2,
+            "nonBlindAirVisionRadius": 5,
+            "surfaceMountainVisionBonus": 1
+        },
+        "powerfulSpecials": {
             "enabled": true
         }
     }

@@ -11,6 +11,10 @@ ltpass*
 
 Chaos/
 Chaos.serv
+freeciv-score.log
+*.sav
+*.sav.gz
+*.log
 
 __pycache__/
 testbuild/
