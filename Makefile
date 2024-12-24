@@ -3,7 +3,14 @@ RULESET_NAME = Chaos
 CONFIG_JSON = game.json
 FILTERS = filters.py
 TESTS = tests.py
-J2CLI = j2 $< $(CONFIG_JSON) --filters $(FILTERS) --tests $(TESTS) --import-env= -o $@
+J2_DEPS = $(CONFIG_JSON) $(FILTERS) $(TESTS)
+J2CLI = chmod -f 664 $@; \
+	j2 $< $(CONFIG_JSON) \
+		--filters $(FILTERS) \
+		--tests $(TESTS) \
+		--import-env= \
+		-o $@; \
+	chmod 444 $@
 
 SRC_DIR = src
 DEST_DIR = $(RULESET_NAME)
@@ -14,9 +21,10 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*)
 SRC_NAMES = $(notdir $(SRC_FILES))
 DEST_NAMES = $(subst .j2,,$(SRC_NAMES))
 DEST_FILES = $(addprefix $(DEST_DIR)/,$(DEST_NAMES))
+
 # FIXME: This is a hack to make it rebuild files when dependencies change, but 
 # it's inefficient as it rebuilds unrelated files too
-DEPENDENCIES = $(shell find $(SRC_DIR) -mindepth 2 -type f)
+SCRIPTS = $(shell find $(SRC_DIR)/scripts/ -mindepth 1 -type f)
 
 # Define the target for all files
 all: $(DEST_DIR) $(DEST_FILES)
@@ -31,7 +39,10 @@ $(DEST_DIR):
 	mkdir --verbose --parents $(DEST_DIR)
 
 # Pattern rules for processing .j2 files
-$(DEST_DIR)/%: $(SRC_DIR)/%.j2 $(DEST_DIR) $(CONFIG_JSON) $(FILTERS) $(TESTS) $(DEPENDENCIES)
+$(DEST_DIR)/script.lua: $(SRC_DIR)/script.lua.j2 $(DEST_DIR) $(J2_DEPS) $(SCRIPTS)
+	$(J2CLI)
+
+$(DEST_DIR)/%:: $(SRC_DIR)/%.j2 $(DEST_DIR) $(J2_DEPS)
 	$(J2CLI)
 
 # Rule for static files

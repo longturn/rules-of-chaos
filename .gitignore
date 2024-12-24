@@ -15,6 +15,7 @@ freeciv-score.log
 *.sav
 *.sav.gz
 *.log
+*.zip
 
 __pycache__/
 testbuild/
