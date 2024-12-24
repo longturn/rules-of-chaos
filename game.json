@@ -13,6 +13,9 @@
         },
         "explosiveExpansion": {
             "enabled": true
+        },
+        "invisiblePortals": {
+            "enabled": true
         }, 
         "blindWorld": {
             "enabled": false,
