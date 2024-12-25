@@ -18,7 +18,7 @@
             "enabled": true
         }, 
         "blindWorld": {
-            "enabled": false,
+            "enabled": true,
             "blindVisionRadius": 0,
             "nonBlindUnderwaterVisionRadius": 1,
             "nonBlindSurfaceVisionRadius": 2,
