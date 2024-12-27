@@ -1,0 +1,85 @@
+; Vision benefit from mountains (for explorer type units only)
+[effect_mountains_vision]
+type    = "Unit_Vision_Radius_Sq"
+{% set smVisBonus = features.blindWorld.surfaceMountainVisionBonus -%}
+{% set nbsVis = features.blindWorld.nonBlindSurfaceVisionRadius -%}
+value   = {{ ((nbsVis + smVisBonus) ** 2) - (nbsVis ** 2) }}
+reqs    =
+    { "type",        "name",      "range", "present"
+      "VisionLayer", "Main",      "Local", TRUE
+      "Terrain",     "Mountains", "Local", TRUE
+      "UnitType",    "Explorer",  "Local", TRUE
+    }
+
+; Blind units can't see invisible units
+[effect_blind_unit_invis_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range", "present"
+      "VisionLayer", "Stealth", "Local", TRUE
+      "UnitFlag",    "OneEye",  "Local", FALSE
+    }
+
+; Blind units can't see subsurface units
+[effect_blind_unit_sub_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range", "present"
+      "VisionLayer", "Subsurface", "Local", TRUE
+      "UnitFlag",    "OneEye",     "Local", FALSE
+    }
+
+; Cities can't see stealth units
+[effect_blind_city_invis_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range"
+      "VisionLayer", "Stealth", "Local"
+    }
+
+; Cities can't see subsurface units
+[effect_blind_city_sub_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range"
+      "VisionLayer", "Subsurface", "Local"
+    }
+
+; AI cities can see working area since they're too stupid to post units
+[effect_blind_ai_city_vision]
+type    = "City_Vision_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqInitial
+                if options.cityWorkRadiusSqInitial else 15 }}
+reqs    = 
+    { "type",        "name", "range"
+      "VisionLayer", "Main", "Local"
+      "AI",          "Hard", "Player"
+    }
+
+[effect_blind_ai_city_theology_vision]
+type    = "City_Vision_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqTheologyBonus
+                if options.cityWorkRadiusSqTheologyBonus else 3 }}
+reqs    = 
+    { "type",        "name",     "range"
+      "VisionLayer", "Main",     "Local"
+      "AI",          "Hard",     "Player"
+      "Tech",        "Theology", "Player"
+    }
+
+; AI cities can see working area since they're too stupid to post units
+[effect_blind_ai_city_mass_transit_vision]
+type    = "City_Vision_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqMassTransitBonus
+                if options.cityWorkRadiusSqMassTransitBonus else 6 }}
+reqs    = 
+    { "type",        "name",         "range"
+      "VisionLayer", "Main",         "Local"
+      "AI",          "Hard",         "Player"
+      "Building",    "Mass Transit", "City"
+    }
+

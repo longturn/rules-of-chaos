@@ -1,0 +1,26 @@
+; City radius at start
+[effect_initial_work_area]
+type    = "City_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqInitial 
+                if options.cityWorkRadiusSqInitial else 15 }}
+
+; City radius increased with Mass Transit before Theology
+[effect_mass_transit_work_area]
+type    = "City_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqMassTransitBonus
+                if options.cityWorkRadiusSqMassTransitBonus else 6 }}
+reqs    =
+    { "type",     "name",         "range",  "present"
+      "Building", "Mass Transit", "City",   TRUE
+    }
+
+; City radius increased after Theology
+[effect_theology_work_area]
+type    = "City_Radius_Sq"
+value   = {{ options.cityWorkRadiusSqTheologyBonus
+                if options.cityWorkRadiusSqTheologyBonus else 3 }}
+reqs    =
+    { "type",     "name",         "range",  "present"
+      "Tech",     "Theology",     "Player", TRUE
+    }
+
