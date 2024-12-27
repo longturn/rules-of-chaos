@@ -1,5 +1,10 @@
 {
     "version": 0.1,
+    "options": {
+        "cityWorkRadiusSqInitial": 15,
+        "cityWorkRadiusSqTheologyBonus": 3,
+        "cityWorkRadiusSqMassTransitBonus": 6
+    },
     "features": {
         "impetuousUnits": {
             "enabled": true,
