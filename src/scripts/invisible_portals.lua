@@ -66,8 +66,8 @@ end
 function invisible_portals:save_portals()
   self:debug("Saving portals")
   invisible_portals_data = self:serialise_portals()
-  self:debug("%d portals saved: %s", 
-    self:portal_count(), invisible_portals_data)
+  self:info("%d portals saved", self:portal_count())
+  self:debug("invisible_portals_data = %s", invisible_portals_data)
   self:debug("Portal save complete")
 end
 
@@ -176,6 +176,7 @@ function invisible_portals:traverse_portal(unit, src_tile, dst_tile)
   if not dest_id then return end
   local destination = find.tile(dest_id)
   local owner = unit.owner
+  local unit_id = tostring(unit)
   local survived = unit:teleport(destination)
   if survived then
     notify.event(owner, destination, E.SCRIPT, 
@@ -186,8 +187,8 @@ function invisible_portals:traverse_portal(unit, src_tile, dst_tile)
       "Your unit has fallen through a tear in space" .. 
       ", never to be seen again.")
   end
-  self:info("Unit %s took portal from (%d, %d) to (%d, %d) and %s",
-    unit, src_tile.x, src_tile.y, dst_tile.x, dst_tile.y,
+  self:info("%s took portal from (%d, %d) to (%d, %d) and %s",
+    unit_id, dst_tile.x, dst_tile.y, destination.x, destination.y,
     survived and "survived" or "died")
 end
 
