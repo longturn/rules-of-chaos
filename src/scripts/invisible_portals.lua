@@ -169,26 +169,53 @@ function invisible_portals:expire_old_portals()
   self:info("Done expiring old portals")
 end
 
+function invisible_portals:disembark_at_portal(unit, source_tile)
+  for cargo in unit:cargo_iterate() do
+    self:info("%s %s was forced to disembark from %s %s during portal transit",
+      cargo, cargo.utype:name_translation(), 
+      unit, unit.utype:name_translation()
+    )
+    self:traverse_portal(cargo, source_tile, source_tile)
+  end
+end
+
 function invisible_portals:traverse_portal(unit, src_tile, dst_tile)  
   self:debug("Unit %s moved from (%d, %d) to (%d, %d)",
     unit, src_tile.x, src_tile.y, dst_tile.x, dst_tile.y)
   local dest_id = self.portals[dst_tile.id]
   if not dest_id then return end
+  local unit_id = unit.id
+  if self.traversing[unit_id] then 
+    return -- Units can't traverse two portals at once
+  end 
   local destination = find.tile(dest_id)
   local owner = unit.owner
-  local unit_id = tostring(unit)
-  local survived = unit:teleport(destination)
-  if survived then
-    notify.event(owner, destination, E.SCRIPT, 
-      "Your unit has fallen through a tear in space" .. 
-      ", reappearing some distance away.")
+  local unit_string = tostring(unit)
+  local unit_tag = unit.utype:name_translation()
+  -- Fix for https://github.com/longturn/freeciv21/issues/2475
+  local survived
+  if not unit.utype:can_exist_at_tile(destination) then
+    self:disembark_at_portal(unit, dst_tile)
+    unit:kill("nonnative_terr", NIL)
+    survived = false
   else
-    notify.event(owner, destination, E.SCRIPT, 
-      "Your unit has fallen through a tear in space" .. 
-      ", never to be seen again.")
+    self.traversing[unit_id] = true
+    survived = unit:teleport(destination)
+    self.traversing[unit_id] = NIL
   end
-  self:info("%s took portal from (%d, %d) to (%d, %d) and %s",
-    unit_id, dst_tile.x, dst_tile.y, destination.x, destination.y,
+  local outcome_text = survived 
+    and string.format(
+      "reappearing some distance away at (%d, %d)", 
+      destination.x, destination.y
+    ) 
+    or "never to be seen again"
+  local message = string.format(
+    "Your %s has fallen through a tear in space at (%d, %d), %s.",
+    unit_tag, dst_tile.x, dst_tile.y, outcome_text
+  )
+  notify.event(owner, destination, E.SCRIPT, message)
+  self:info("%s %s took portal from (%d, %d) to (%d, %d) and %s",
+    unit_string, unit_tag, dst_tile.x, dst_tile.y, destination.x, destination.y,
     survived and "survived" or "died")
 end
 
