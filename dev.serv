@@ -13,8 +13,8 @@ set unitwaittime 0 # disabled
 set fixedlength DISABLED
 set first_timeout 120 # 2 mins
 set timeout 10 # 10 secs
-set fogofwar DISABLED
-set revealmap START
+#set fogofwar DISABLED
+#set revealmap START
 set startcity ENABLED
 
 # Dev player settings
