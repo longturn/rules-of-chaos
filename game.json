@@ -1,5 +1,7 @@
 {
-    "version": 0.1,
+    "project": {
+        "version": 0.1
+    },
     "options": {
         "cityWorkRadiusSqInitial": 15,
         "cityWorkRadiusSqTheologyBonus": 3,
@@ -11,7 +13,7 @@
             "provokingChance": 0.15
         },
         "inaccessibleClimates": {
-            "enabled": false,
+            "enabled": true,
             "baseCityPollution": 1,
             "globalWarmingAccumulationFactor": 5.0,
             "pollutionProductionIncrease": 1
@@ -20,7 +22,7 @@
             "enabled": true
         },
         "invisiblePortals": {
-            "enabled": true
+            "enabled": false
         }, 
         "blindWorld": {
             "enabled": true,

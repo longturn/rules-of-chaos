@@ -11,6 +11,11 @@
 -- file called 'default.lua'. The one loaded if your ruleset
 -- does not provide an override is default/default.lua.
 
+-- Import data from game.json
+project = {{ project | to_lua }}
+options = {{ options | to_lua }}
+features = {{ features | to_lua }}
+
 {% include 'src/scripts/place_ruins_at_destroyed_city.lua' %}
 {% include 'src/scripts/add_random_terrain_labels_to_map.lua' %}
 {% if features.invisiblePortals.enabled -%}
