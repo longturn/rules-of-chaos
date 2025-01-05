@@ -1,7 +1,6 @@
 -- Initialise global namespace for portal data
 invisible_portals = {
-  density = 1 / 37,
-  half_life = 8
+  traversing = {}
 }
 
 function invisible_portals:log(level, fmt, ...)
@@ -34,20 +33,22 @@ end
 
 function invisible_portals:init()
   self:debug("Creating namespace")
-  local collapse_chance = 1 - 2^(-1 / self.half_life)
-  local form_chance = (self.density * collapse_chance) / (1 - self.density)
-    self.initial_density_freq = math.floor(self.density * 1000000)
+  local half_life = features.invisiblePortals.halfLife
+  local density = features.invisiblePortals.density
+  local collapse_chance = 1 - 2^(-1 / half_life)
+  local form_chance = (density * collapse_chance) / (1 - density)
+  self.initial_density_freq = math.floor(density * 1000000)
   self.initial_density_range = 1000000
   self:info("Initial portal density = %d / %d", 
-    self.initial_density_freq, self.initial_density_range)
+  self.initial_density_freq, self.initial_density_range)
   self.collapse_chance_freq = math.floor(collapse_chance * 1000000)
   self.collapse_chance_range = 1000000
   self:info("Portal collapse chance per turn = %d / %d",
-    self.collapse_chance_freq, self.collapse_chance_range)
+  self.collapse_chance_freq, self.collapse_chance_range)
   self.form_chance_freq = math.floor(form_chance * 1000000)
   self.form_chance_range = 1000000
   self:info("Portal form chance per turn = %d / %d", 
-    self.form_chance_freq, self.form_chance_range)
+  self.form_chance_freq, self.form_chance_range)
   local _portal_cache = NIL
   setmetatable(self, {
     __index = function(table, key)
@@ -179,6 +180,14 @@ function invisible_portals:disembark_at_portal(unit, source_tile)
   end
 end
 
+function invisible_portals:fatal_transit_allowed(player)
+  if player:has_flag("ai") then
+    return features.invisiblePortals.allowFatalTransitAI
+  else
+    return features.invisiblePortals.allowFatalTransit
+  end
+end 
+
 function invisible_portals:traverse_portal(unit, src_tile, dst_tile)  
   self:debug("Unit %s moved from (%d, %d) to (%d, %d)",
     unit, src_tile.x, src_tile.y, dst_tile.x, dst_tile.y)
@@ -190,14 +199,26 @@ function invisible_portals:traverse_portal(unit, src_tile, dst_tile)
   end 
   local destination = find.tile(dest_id)
   local owner = unit.owner
+  local fatal = self:fatal_transit_allowed(owner)
   local unit_string = tostring(unit)
   local unit_tag = unit.utype:name_translation()
   -- Fix for https://github.com/longturn/freeciv21/issues/2475
   local survived
   if not unit.utype:can_exist_at_tile(destination) then
     self:disembark_at_portal(unit, dst_tile)
-    unit:kill("nonnative_terr", NIL)
-    survived = false
+    if fatal then
+      unit:kill("nonnative_terr", NIL)
+      survived = false
+    else
+      return
+    end
+  elseif destination:is_enemy(owner) then
+    if fatal then
+      unit:kill("killed", NIL)
+      survived = false
+    else
+      return
+    end
   else
     self.traversing[unit_id] = true
     survived = unit:teleport(destination)

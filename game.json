@@ -22,8 +22,12 @@
             "enabled": true
         },
         "invisiblePortals": {
-            "enabled": false
-        }, 
+            "enabled": true,
+            "allowFatalTransit": false,
+            "allowFatalTransitAI": false,
+            "density": 0.027,
+            "halfLife": 8
+        },
         "blindWorld": {
             "enabled": true,
             "blindVisionRadius": 0,
