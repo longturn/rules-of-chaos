@@ -1605,6 +1605,15 @@ effects        = "ReducePopulation", "Fallout"
 ;
 ; */ <-- avoid gettext warnings
 
+{% if features.spaceExodus.enabled -%}
+[achievement_spaceship]
+name           = _("Spaceship Launch")
+type           = "Spaceship"
+unique         = FALSE
+culture        = 10000
+first_msg      = _("You're the first one to launch a spaceship and leave this cursed planet behind!");
+cons_msg       = _("You have launched a spaceship to leave this cursed planet behind!")
+{% else -%}
 [achievement_spaceship]
 name           = _("Spaceship Launch")
 type           = "Spaceship"
@@ -1612,6 +1621,7 @@ unique         = FALSE
 culture        = 10000
 first_msg      = _("You're the first one to launch a spaceship towards Alpha Centauri!");
 cons_msg       = _("You have launched a spaceship towards Alpha Centauri!")
+{% endif %}
 
 [achievement_map_known]
 name           = _("Entire Map Known")
@@ -1940,10 +1950,17 @@ set = {
 "tradeworldrelpct", 50
 
 ; victory
+{% if features.spaceExodus.enabled -%}
+"victories", "SPACERACE"
+"endspaceship", "DISABLED"
+"spaceship_travel_time", 1000
+"endturn", 5000
+{% else -%}
 "victories", "SPACERACE|ALLIED"
 "endspaceship", "ENABLED"
 "spaceship_travel_time", 200
 "endturn", 5000
+{% endif %}
 
 ; technology
 "sciencebox", 100

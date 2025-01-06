@@ -21,3 +21,7 @@ features = {{ features | to_lua }}
 {% if features.invisiblePortals.enabled -%}
     {% include 'src/scripts/invisible_portals.lua' %}
 {%- endif -%}
+{% if features.spaceExodus.enabled -%}
+    {% include 'src/scripts/space_exodus.lua' %}
+{%- endif -%}
+
