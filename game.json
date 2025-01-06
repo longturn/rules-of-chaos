@@ -38,6 +38,12 @@
         },
         "powerfulSpecials": {
             "enabled": true
+        },
+        "spaceExodus": {
+            "enabled": true,
+            "expectedLaunchTurn": 250,
+            "earlyFinishMultiplier": 15,
+            "firstPlaceBonus": 500
         }
     }
 }
