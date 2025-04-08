@@ -930,10 +930,11 @@ actor_reqs    =
 [actionenabler_nuke_city]
 action="Nuke City"
 actor_reqs=
-    { "type",         "name",    "range"
-      "UnitFlag",     "Nuclear", "Local"
-      "MinMoveFrags", "1",       "Local"
-      "DiplRel",      "War",     "Local"
+    { "type",         "name",       "range", "present"
+      "UnitFlag",     "Nuclear",    "Local", TRUE
+      "UnitClass",    "Levitating", "Local", FALSE
+      "MinMoveFrags", "1",          "Local", TRUE
+      "DiplRel",      "War",        "Local", TRUE
     }
 
 {% if features.explosiveExpansion.enabled -%}
@@ -951,10 +952,11 @@ actor_reqs=
 [actionenabler_nuke_units]
 action="Nuke Units"
 actor_reqs=
-    { "type",         "name",    "range"
-      "UnitFlag",     "Nuclear", "Local"
-      "MinMoveFrags", "1",       "Local"
-      "DiplRel",      "War",     "Local"
+    { "type",         "name",       "range", "present"
+      "UnitFlag",     "Nuclear",    "Local", TRUE
+      "UnitClass",    "Levitating", "Local", FALSE
+      "MinMoveFrags", "1",          "Local", TRUE
+      "DiplRel",      "War",        "Local", TRUE
     }
 target_reqs=
     { "type",     "name",   "range", "present"
