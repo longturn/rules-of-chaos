@@ -3,7 +3,7 @@
 
 rulesetdir Chaos
 
-read game.serv
+read main.serv
 
 # Technical settings
 set compresstype "PLAIN"

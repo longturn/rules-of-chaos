@@ -3,7 +3,7 @@
 
 rulesetdir Chaos
 
-read game.serv
+read main.serv
 
 # Longturn test game settings
 set unitwaittime 10 # 10 sec
