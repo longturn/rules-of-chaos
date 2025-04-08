@@ -1,6 +1,6 @@
 def to_lua(obj):
     if isinstance(obj, str):
-        return f'"{value}"'
+        return f'"{obj}"'
     elif isinstance(obj, bool):
         return str(obj).lower()
     elif isinstance(obj, dict):

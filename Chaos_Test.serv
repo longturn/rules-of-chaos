@@ -1,6 +1,3 @@
-# Server commands to make Longturn Extended Experimental Freeciv rules based on Civ2Civ3 ruleset
-#
-
 rulesetdir Chaos
 
 read main.serv
