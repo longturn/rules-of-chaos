@@ -19,7 +19,8 @@
             "pollutionProductionIncrease": 1
         },
         "explosiveExpansion": {
-            "enabled": true
+            "enabled": true,
+            "speed": 2
         },
         "invisiblePortals": {
             "enabled": true,
