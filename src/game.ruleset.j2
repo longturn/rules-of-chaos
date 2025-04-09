@@ -912,29 +912,72 @@ action = "Explode Nuclear"
 actor_reqs    =
     { "type",   "name", "range", "present"
       "UnitFlag", "Nuclear", "Local", TRUE
+      "UnitClass", "Levitating", "Local", FALSE
     }
+
+{% if features.explosiveExpansion.enabled -%}
+[actionenabler_nuclear_settler]
+action = "Explode Nuclear"
+actor_reqs    =
+    { "type",   "name", "range", "present"
+      "UnitFlag", "Nuclear", "Local", TRUE
+      "UnitClass", "Levitating", "Local", TRUE
+      "MinMoveFrags", "{{ (features.explosiveExpansion.speed * 9) | int }}", "Local", TRUE
+    }
+
+{% endif -%}
 
 [actionenabler_nuke_city]
 action="Nuke City"
 actor_reqs=
+    { "type",         "name",       "range", "present"
+      "UnitFlag",     "Nuclear",    "Local", TRUE
+      "UnitClass",    "Levitating", "Local", FALSE
+      "MinMoveFrags", "1",          "Local", TRUE
+      "DiplRel",      "War",        "Local", TRUE
+    }
+
+{% if features.explosiveExpansion.enabled -%}
+[actionenabler_nuclear_settler_vs_city]
+action="Nuke City"
+actor_reqs=
     { "type",         "name",    "range"
       "UnitFlag",     "Nuclear", "Local"
-      "MinMoveFrags", "1",       "Local"
       "DiplRel",      "War",     "Local"
+      "MinMoveFrags", "{{ (features.explosiveExpansion.speed * 9) | int }}", "Local", TRUE
     }
+
+{% endif -%}
 
 [actionenabler_nuke_units]
 action="Nuke Units"
 actor_reqs=
-    { "type",         "name",    "range"
-      "UnitFlag",     "Nuclear", "Local"
-      "MinMoveFrags", "1",       "Local"
-      "DiplRel",      "War",     "Local"
+    { "type",         "name",       "range", "present"
+      "UnitFlag",     "Nuclear",    "Local", TRUE
+      "UnitClass",    "Levitating", "Local", FALSE
+      "MinMoveFrags", "1",          "Local", TRUE
+      "DiplRel",      "War",        "Local", TRUE
     }
 target_reqs=
     { "type",     "name",   "range", "present"
       "CityTile", "Center", "Local", FALSE
     }
+
+{% if features.explosiveExpansion.enabled -%}
+[actionenabler_nuclear_settler_vs_stack]
+action="Nuke Units"
+actor_reqs=
+    { "type",         "name",    "range"
+      "UnitFlag",     "Nuclear", "Local"
+      "DiplRel",      "War",     "Local"
+      "MinMoveFrags", "{{ (features.explosiveExpansion.speed * 9) | int }}", "Local", TRUE
+    }
+target_reqs=
+    { "type",     "name",   "range", "present"
+      "CityTile", "Center", "Local", FALSE
+    }
+
+{% endif -%}
 
 [actionenabler_attack_native]
 action = "Attack"

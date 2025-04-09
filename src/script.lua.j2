@@ -18,6 +18,9 @@ features = {{ features | to_lua }}
 
 {% include 'src/scripts/place_ruins_at_destroyed_city.lua' %}
 {% include 'src/scripts/add_random_terrain_labels_to_map.lua' %}
+{% if features.inaccessibleClimates.enabled -%}
+    {% include 'src/scripts/inaccessible_climates.lua' %}
+{%- endif -%}
 {% if features.invisiblePortals.enabled -%}
     {% include 'src/scripts/invisible_portals.lua' %}
 {%- endif -%}
