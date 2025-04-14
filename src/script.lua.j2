@@ -16,15 +16,14 @@ project = {{ project | to_lua }}
 options = {{ options | to_lua }}
 features = {{ features | to_lua }}
 
-{% include 'src/scripts/place_ruins_at_destroyed_city.lua' %}
-{% include 'src/scripts/add_random_terrain_labels_to_map.lua' %}
+{% include 'includes/scripts/place_ruins_at_destroyed_city.lua' %}
 {% if features.inaccessibleClimates.enabled -%}
-    {% include 'src/scripts/inaccessible_climates.lua' %}
+    {% include 'includes/scripts/inaccessible_climates.lua' %}
 {%- endif -%}
 {% if features.invisiblePortals.enabled -%}
-    {% include 'src/scripts/invisible_portals.lua' %}
+    {% include 'includes/scripts/invisible_portals.lua' %}
 {%- endif -%}
 {% if features.spaceExodus.enabled -%}
-    {% include 'src/scripts/space_exodus.lua' %}
+    {% include 'includes/scripts/space_exodus.lua' %}
 {%- endif -%}
 
