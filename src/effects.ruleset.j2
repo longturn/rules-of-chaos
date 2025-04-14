@@ -315,9 +315,9 @@ type    = "Max_Trade_Routes"
 value   = 0
 
 {% if features.blindWorld.enabled -%}
-    {%- include "src/effects/vision-blindWorld.j2" %}
+    *include "Chaos/effects/vision-blindWorld.ruleset"
 {% else -%}
-    {%- include "src/effects/vision.j2" %}
+    *include "Chaos/effects/vision.ruleset"
 {%- endif %}
 
 ; Movement penalty if ended turn at mountains (for every land unit)
@@ -5390,8 +5390,8 @@ reqs    =
     { "type", "name", "range"
       "Building", "Atlantic Telegraph Company", "World"
     }
-	
-{% include "src/effects/cityWorkingRadius.j2" -%}
+
+*include "Chaos/effects/cityWorkingRadius.ruleset"
 
 [effect_ruins_trade]
 type    = "Output_Inc_Tile"
