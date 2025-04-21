@@ -2,8 +2,8 @@
 set compresstype "LIBZ"
 set ec_chat "enabled"
 set ec_info "enabled" 
-set ec_max_size "5000"
-set ec_turns "9"
+set ec_max_size 20000
+set ec_turns 500
 set maxconnectionsperhost "4"
 set autosaves "TURN|GAMEOVER|QUITIDLE|INTERRUPT"
 set saveturns "1"
