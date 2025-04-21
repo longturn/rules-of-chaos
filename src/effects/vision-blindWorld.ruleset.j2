@@ -52,34 +52,20 @@ reqs    =
 ; AI cities can see working area since they're too stupid to post units
 [effect_blind_ai_city_vision]
 type    = "City_Vision_Radius_Sq"
-value   = {{ options.cityWorkRadiusSqInitial
-                if options.cityWorkRadiusSqInitial else 15 }}
+value   = {{ features.blindWorld.nonBlindSurfaceVisionRadius ** 2 }}
 reqs    = 
     { "type",        "name", "range"
       "VisionLayer", "Main", "Local"
       "AI",          "Hard", "Player"
     }
 
-[effect_blind_ai_city_theology_vision]
-type    = "City_Vision_Radius_Sq"
-value   = {{ options.cityWorkRadiusSqTheologyBonus
-                if options.cityWorkRadiusSqTheologyBonus else 3 }}
-reqs    = 
-    { "type",        "name",     "range"
-      "VisionLayer", "Main",     "Local"
-      "AI",          "Hard",     "Player"
-      "Tech",        "Theology", "Player"
-    }
-
-; AI cities can see working area since they're too stupid to post units
-[effect_blind_ai_city_mass_transit_vision]
-type    = "City_Vision_Radius_Sq"
-value   = {{ options.cityWorkRadiusSqMassTransitBonus
-                if options.cityWorkRadiusSqMassTransitBonus else 6 }}
-reqs    = 
-    { "type",        "name",         "range"
-      "VisionLayer", "Main",         "Local"
-      "AI",          "Hard",         "Player"
-      "Building",    "Mass Transit", "City"
+; Let AI diplomatic units see their targets
+[effect_blind_ai_espionage_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = 1
+reqs    =
+    { "type",        "name",      "range", "present"
+      "VisionLayer", "Main",      "Local", TRUE
+      "UnitFlag",    "Diplomat",  "Local", TRUE
     }
 
