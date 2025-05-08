@@ -129,6 +129,18 @@ function invisible_portals:destroy_portal(tile_id)
     tile.x, tile.y, dest_tile.x, dest_tile.y)
 end
 
+-- Mark a portal on the map
+function invisible_portals:mark_portal(source_tile, dest_tile)
+  source_tile:set_label(string.format("(%d, %d)", dest_tile.x, dest_tile.y))
+  source_tile:create_extra("Portal")
+end
+
+-- Remove a portal marker from the map
+function invisible_portals:unmark_portal(source_tile)
+  source_tile:set_label("")
+  source_tile:remove_extra("Portal")
+end
+
 -- Distribute initial portals across the map
 function invisible_portals:create_initial_portals()
   self:info("Creating initial portals")
@@ -192,7 +204,12 @@ function invisible_portals:traverse_portal(unit, src_tile, dst_tile)
   self:debug("Unit %s moved from (%d, %d) to (%d, %d)",
     unit, src_tile.x, src_tile.y, dst_tile.x, dst_tile.y)
   local dest_id = self.portals[dst_tile.id]
-  if not dest_id then return end
+  if not dest_id then
+    if dst_tile:has_extra("Portal") then
+      self:unmark_portal(dst_tile)
+    end
+    return
+  end
   local unit_id = unit.id
   if self.traversing[unit_id] then 
     return -- Units can't traverse two portals at once
@@ -235,6 +252,7 @@ function invisible_portals:traverse_portal(unit, src_tile, dst_tile)
     unit_tag, dst_tile.x, dst_tile.y, outcome_text
   )
   notify.event(owner, destination, E.SCRIPT, message)
+  self:mark_portal(dst_tile, destination)
   self:info("%s %s took portal from (%d, %d) to (%d, %d) and %s",
     unit_string, unit_tag, dst_tile.x, dst_tile.y, destination.x, destination.y,
     survived and "survived" or "died")
