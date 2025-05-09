@@ -1,0 +1,69 @@
+; Vision benefit from mountains (for explorer type units only)
+[effect_mountains_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = 5
+reqs    =
+    { "type",        "name",      "range", "present"
+      "VisionLayer", "Main",      "Local", TRUE
+      "Terrain",     "Mountains", "Local", TRUE
+      "UnitType",    "Explorer",  "Local", TRUE
+    }
+
+; Blind units can't see invisible units
+[effect_blind_unit_invis_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range", "present"
+      "VisionLayer", "Stealth", "Local", TRUE
+      "UnitFlag",    "OneEye",  "Local", FALSE
+    }
+
+; Blind units can't see subsurface units
+[effect_blind_unit_sub_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range", "present"
+      "VisionLayer", "Subsurface", "Local", TRUE
+      "UnitFlag",    "OneEye",     "Local", FALSE
+    }
+
+; Cities can't see stealth units
+[effect_blind_city_invis_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",    "range"
+      "VisionLayer", "Stealth", "Local"
+    }
+
+; Cities can't see subsurface units
+[effect_blind_city_sub_vision]
+type    = "City_Vision_Radius_Sq"
+value   = -999
+reqs    = 
+    { "type",        "name",       "range"
+      "VisionLayer", "Subsurface", "Local"
+    }
+
+; AI cities can see working area since they're too stupid to post units
+[effect_blind_ai_city_vision]
+type    = "City_Vision_Radius_Sq"
+value   = 4
+reqs    = 
+    { "type",        "name", "range"
+      "VisionLayer", "Main", "Local"
+      "AI",          "Hard", "Player"
+    }
+
+; Let AI diplomatic units see their targets
+[effect_blind_ai_espionage_vision]
+type    = "Unit_Vision_Radius_Sq"
+value   = 1
+reqs    =
+    { "type",        "name",      "range", "present"
+      "VisionLayer", "Main",      "Local", TRUE
+      "UnitFlag",    "Diplomat",  "Local", TRUE
+    }
+

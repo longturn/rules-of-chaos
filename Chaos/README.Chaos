@@ -1,0 +1,58 @@
+=============================================
+Chaos (LongTurn Chaos) Ruleset for Freeciv 21
+=============================================
+
+The goal of Chaos is to try out completely unrealistic, totally insane ideas, 
+and see how much fun we can have in the ensuing chaos. It is a game-mode where 
+anything can happen for no reason. It will not be fair, it will not be 
+balanced, and it will not be predictable. This is not one for the faint of 
+heart, you have been warned!
+
+Features:
+---------
+
+- Impetuous Units:
+
+  - Units with moves remaining may automatically attack enemy units that move
+    next to them and the unit deems it favourable to attack rather than allow
+    themselves to be attacked.
+
+  - A random selection of unit types will provoke units that they move 
+    adjacent to into attacking them regardless of whether it is more favourable
+    to defend against the attack or not.
+
+- Inaccessible Climates:
+
+  - All cities get 1 pollution by default.
+
+  - Pollution adds to global warming 5.0x faster.
+
+  - Pollution no longer halves tile output, but instead increases shield
+    output by 1.
+
+  - Global warming and nuclear winter cause terrain to become inaccessible, 
+    and inaccessible terrain to transform into a different accessible terrain.
+
+- Explosive Expansion:
+
+  - Manhattan project has been removed - Nukes are enabled from the start.
+  
+  - Settlers can sacrifice themselves in a nuclear detonation.
+  
+  - Settlers levitate, moving slowly over any terrain including open water.
+  
+  - Settlers can't use roads, boats, or airlift, and only move 1 tile per turn.
+  
+  - Settlers receive no defensive bonuses, and are very vulnerable to attack
+    from ground, air, or sea.
+
+- Blind World:
+
+  - Cities, bases and most units have 0 vision radius
+
+  - Explorer, Spy, and Patrol type units have 2 vision radius
+
+  - Submarine type units have 1 vision radius
+
+  - Aerial surveillance units have 5 vision radius
+
