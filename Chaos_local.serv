@@ -8,8 +8,8 @@ set compresstype "PLAIN"
 # Dev test settings
 set unitwaittime 0 # disabled
 set fixedlength DISABLED
-set first_timeout 120 # 2 mins
-set timeout 10 # 10 secs
+#set first_timeout 120 # 2 mins
+#set timeout 10 # 10 secs
 #set fogofwar DISABLED
 #set revealmap START
 #set startcity ENABLED
@@ -23,7 +23,7 @@ cmdlevel hack
 
 hard
 
-set startunits cccccwwwwwwxxxx
+set startunits cccccwwwwwwxxxxx
 set first_timeout 0
 set timeout 0
 #start

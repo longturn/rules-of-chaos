@@ -1,0 +1,36 @@
+{
+  "info": {
+    "options": "+modpack-1.0",
+    "base_url": "https://raw.githubusercontent.com/longturn/rules-of-chaos/refs/heads/modpack-2025-05-09/",
+    "name": "Longturn Chaos Ruleset",
+    "type": "Ruleset",
+    "version": "2025-05-09-8a67d16"
+  },
+  "files": [
+    {
+      "url": "Chaos_local.serv",
+      "dest": "Chaos.serv"
+    },
+    "main.serv",
+    "Chaos/README.Chaos",
+    "Chaos/buildings.ruleset",
+    "Chaos/cities.ruleset",
+    "Chaos/effects.ruleset",
+    "Chaos/effects/cityWorkingRadius.ruleset",
+    "Chaos/effects/vision-blindWorld.ruleset",
+    "Chaos/effects/vision.ruleset",
+    "Chaos/game.ruleset",
+    "Chaos/governments.ruleset",
+    "Chaos/nation_chaos/animals.ruleset",
+    "Chaos/nation_chaos/npc_animals.ruleset",
+    "Chaos/nation_chaos/npc_pirate.ruleset",
+    "Chaos/nation_chaos/pirate.ruleset",
+    "Chaos/nations.ruleset",
+    "Chaos/parser.lua",
+    "Chaos/script.lua",
+    "Chaos/styles.ruleset",
+    "Chaos/techs.ruleset",
+    "Chaos/terrain.ruleset",
+    "Chaos/units.ruleset"
+  ]
+}
