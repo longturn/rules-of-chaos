@@ -9,7 +9,7 @@ ltpass*
 *.rej
 *.swp
 
-Chaos/
+# Chaos/
 freeciv-score.log
 *.sav
 *.sav.gz
