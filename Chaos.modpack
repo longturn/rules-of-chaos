@@ -1,6 +1,6 @@
 [info]
 options = "+Freeciv-2.6-modpack"
-baseURL = "https://raw.githubusercontent.com/longturn/rules-of-chaos/main"
+baseURL = "https://raw.githubusercontent.com/longturn/rules-of-chaos/refs/heads/modpack-2025-05-09"
 name = "Longturn Chaos Ruleset"
 type = "Ruleset"
 version = "2025-05-09-8a67d16"
